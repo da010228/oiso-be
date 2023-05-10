@@ -1,0 +1,60 @@
+package com.ssafy.user.model.service;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.stereotype.Service;
+
+import com.ssafy.user.model.User;
+import com.ssafy.user.model.mapper.UserMapper;
+
+
+@Service
+public class UserServiceImpl implements UserService {
+
+	private UserMapper userMapper;
+
+	public UserServiceImpl(UserMapper memberDao) {
+		this.userMapper = memberDao;
+	}
+
+	@Override
+	public int idCheck(String userId) throws Exception {
+		return userMapper.idCheck(userId);
+	}
+
+	@Override
+	public int joinMember(User memberDto) throws Exception {
+		return userMapper.joinMember(memberDto);
+	}
+
+	@Override
+	public User loginMember(String userId, String userPwd) throws Exception {
+		Map<String, String> map = new HashMap<>();
+		map.put("userId", userId);
+		map.put("userPwd", userPwd);
+		return userMapper.loginMember(map);
+	}
+
+	@Override
+	public List<User> listMember() throws Exception {
+		return userMapper.listMember();
+	}
+
+	@Override
+	public User getMember(String userId) throws Exception {
+		return userMapper.getMember(userId);
+	}
+
+	@Override
+	public void updateMember(User memberDto) throws Exception {
+		userMapper.updateMember(memberDto);
+	}
+
+	@Override
+	public void deleteMember(String userId) throws Exception {
+		userMapper.deleteMember(userId);
+	}
+
+}

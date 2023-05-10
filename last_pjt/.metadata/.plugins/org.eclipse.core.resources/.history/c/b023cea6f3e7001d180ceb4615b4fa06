@@ -1,0 +1,55 @@
+package com.ssafy.user.model.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.ssafy.user.model.User;
+
+@Service
+public class UserServiceImpl implements UserService{
+
+	@Override
+	public int idCheck(String userId) throws Exception {
+		
+		return 
+	}
+
+	@Override
+	public int joinMember(User user) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public User loginMember(String userId, String userPwd) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<User> listMember() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public User getMember(String userId) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateMember(User user) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteMember(String userId) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+	
+
+}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+      crossorigin="anonymous" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+      crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <h1>로그인</h1>
+    <div
+      class="d-flex flex-column justify-content-center align-items-center container">
+      <form>
+        <input type="hidden" name="action" value="login" />
+        <div class="form-group">
+          <label for="userid">id:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="userid"
+            name="userid"
+            placeholder="ID 입력"
+            value="" />
+        </div>
+        <div class="form-group">
+          <label for="userpwd">Password:</label>
+          <input
+            type="password"
+            class="form-control"
+            id="userpwd"
+            name="userpwd"
+            placeholder="비밀번호 입력" />
+        </div>
+        <div class="form-group form-check">
+          <label class="form-check-label">
+            <input class="form-check-input" type="checkbox" name="remember" />
+            아이디 기억하기
+          </label>
+        </div>
+        <button
+          type="button"
+          class="btn btn-primary"
+          value="login"
+          id="btn-login">
+          로그인
+        </button>
+      </form>
+    </div>
+    <script>
+      const root = "";
+
+      // 회원 등록
+      document
+        .querySelector("#btn-login")
+        .addEventListener("click", function () {
+          let registerinfo = {
+            userId: document.querySelector("#userid").value,
+            userPwd: document.querySelector("#userpwd").value,
+          };
+
+          // POST 전송을 위한 설정
+          let config = {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(registerinfo),
+          };
+
+          fetch(`${root}/user/login`, config)
+            .then((response) => {
+              switch (response.status) {
+                case 200:
+                  document.cookie =
+                    "user=" + document.querySelector("#userid").value; // 이름이 'user'인 쿠키의 값만 갱신함
+                  console.log(document.cookie);
+                  console.log(document.querySelector("#userid").value);
+                  alert(document.cookie);
+                  return response.json();
+
+                case 500:
+                  throw new Error("로그인 오류!!");
+              }
+            })
+            .then((data) => {
+              location.href = "./main.html";
+            })
+            .catch((error) => {
+              alert(error);
+            });
+        });
+    </script>
+  </body>
+</html>
