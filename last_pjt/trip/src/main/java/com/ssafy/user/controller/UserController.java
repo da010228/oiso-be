@@ -48,14 +48,19 @@ public class UserController {
 	}
 
 	@PostMapping("/login")
-	public void login(@RequestBody User user) {
+	public ResponseEntity<?> login(@RequestBody User user) {
 		User user2 = null;
 //		logger.debug("userid : {}, userpwd : {}", userId, userPwd);
 		try {
 			user2 = userService.loginMember(user.getUserId(), user.getUserPwd());
+			if(user2 == null) {
+				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT); // 204
+			}
+			return new ResponseEntity<User>(user2, HttpStatus.OK); // 200
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT); // 204
 		}
 	}
 
