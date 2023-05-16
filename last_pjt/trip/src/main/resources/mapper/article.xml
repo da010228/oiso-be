@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.article.model.mapper.ArticleMapper">
+
+	<resultMap type="Board" id="board">
+		<result column="articleNo" property="articleNo"/>
+		<result column="id" property="id"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content"/>
+		<result column="regTime" property="regTime"/>
+	</resultMap>
+
+	<select id="getBoardList" resultMap="board">
+		SELECT articleNo, id, title, content, regTime
+		FROM board
+	</select>
+	
+	<select id="getBoard" resultMap="board">
+		SELECT articleNo, id, title, content, regTime
+		FROM board
+		where articlNo = #{articleNo}
+	</select>
+	
+	<update id="putBoard">
+		UPDATE board
+		<trim prefix="set" suffixOverrides=",">
+			<if test="title != null"> title = #{title}</if>
+			<if test="content != null"> content = #{content}</if>
+		</trim>
+		WHERE articleNo = #{articleNo}
+	</update>
+	
+	<delete id="delBoard">
+		DELETE
+		FROM board
+		WHERE articleNo = #{articleNo}
+	</delete>
+	
+	<insert id="postBoard">
+		insert into board (id, title, content, regTime)
+		values (#{id}, #{title}, #{content}, #{regTime})
+	</insert>
+	
+</mapper>
