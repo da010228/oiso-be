@@ -20,8 +20,8 @@ public class TripServiceImpl implements TripService {
 	}
 
 	@Override
-	public List<Trip> hotTrip(Trip trip) throws Exception {
-		return tripMapper.hotTrip(trip);
+	public List<Trip> hotTrip() throws Exception {
+		return tripMapper.hotTrip();
 	}
 
 }
