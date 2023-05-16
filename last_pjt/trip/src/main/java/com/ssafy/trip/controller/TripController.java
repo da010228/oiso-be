@@ -14,6 +14,11 @@ import com.ssafy.trip.model.service.TripService;
 @RestController
 @RequestMapping("/trip")
 public class TripController {
+	
+	@GetMapping("/test")
+	public String test() {
+		return "제발";
+	}
 
 
 	private TripService service;
@@ -26,12 +31,6 @@ public class TripController {
 	@PostMapping("/info")
 	public List<Trip> attractionList(@RequestBody Trip trip) throws Exception {
 		List<Trip> list = service.listTrip(trip);
-		return list;
-	}
-	
-	@PostMapping("/info/hotplace")
-	public List<Trip> hotList(@RequestBody Trip trip) throws Exception {
-		List<Trip> list = service.hotTrip(trip);
 		return list;
 	}
 	

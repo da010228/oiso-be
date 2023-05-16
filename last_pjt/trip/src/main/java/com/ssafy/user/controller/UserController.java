@@ -38,6 +38,7 @@ public class UserController {
 		System.out.println(user.toString());
 		try {
 			int cnt = userService.joinMember(user);
+			System.out.println("asdhflkjsdfhk");
 			return new ResponseEntity<Integer>(cnt, HttpStatus.OK); // 200
 		} catch (Exception e) {
 			e.printStackTrace();
