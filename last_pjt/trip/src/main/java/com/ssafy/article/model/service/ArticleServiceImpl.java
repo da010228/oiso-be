@@ -2,6 +2,7 @@ package com.ssafy.article.model.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.article.model.Article;
@@ -9,9 +10,9 @@ import com.ssafy.article.model.mapper.ArticleMapper;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
+	
 	private ArticleMapper articleMapper;
 
-//
 	public ArticleServiceImpl(ArticleMapper articleMapper) {
 		this.articleMapper = articleMapper;
 	}
@@ -23,25 +24,21 @@ public class ArticleServiceImpl implements ArticleService {
 
 	@Override
 	public Article getBoard(int articleNo) throws Exception {
-		// TODO Auto-generated method stub
 		return articleMapper.getBoard(articleNo);
 	}
 
 	@Override
 	public int putBoard(Article article) throws Exception {
-		// TODO Auto-generated method stub
 		return articleMapper.putBoard(article);
 	}
 
 	@Override
 	public int delBoard(int articleNo) throws Exception {
-		// TODO Auto-generated method stub
 		return articleMapper.delBoard(articleNo);
 	}
 
 	@Override
 	public int postBoard(Article article) throws Exception {
-		// TODO Auto-generated method stub
 		return articleMapper.postBoard(article);
 	}
 

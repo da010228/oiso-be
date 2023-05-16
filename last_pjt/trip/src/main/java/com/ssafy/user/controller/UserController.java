@@ -50,7 +50,8 @@ public class UserController {
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody User user) {
 		User user2 = null;
-//		logger.debug("userid : {}, userpwd : {}", userId, userPwd);
+		System.out.println(user.getUserId()+" "+ user.getUserPwd());
+		logger.debug("userid : {}, userpwd : {}", user.getUserId(), user.getUserPwd());
 		try {
 			user2 = userService.loginMember(user.getUserId(), user.getUserPwd());
 			if(user2 == null) {
