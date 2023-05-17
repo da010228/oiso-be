@@ -2,7 +2,7 @@ package com.ssafy.article.model;
 
 public class Article {
 
-	private String articleNo;
+	private int articleNo;
 	private String title;
 	private String id;
 	private String content;
@@ -11,7 +11,7 @@ public class Article {
 	public Article() {
 		super();
 	}
-	public Article(String articleNo, String title, String id, String content, String regTime) {
+	public Article(int articleNo, String title, String id, String content, String regTime) {
 		super();
 		this.articleNo = articleNo;
 		this.title = title;
@@ -19,10 +19,21 @@ public class Article {
 		this.content = content;
 		this.regTime = regTime;
 	}
-	public String getArticleNo() {
+	public Article( String title, String content) {
+		super();
+		this.title = title;
+		this.content = content;
+	}
+	public Article( String title, String id, String content) {
+		super();
+		this.title = title;
+		this.id = id;
+		this.content = content;
+	}
+	public int getArticleNo() {
 		return articleNo;
 	}
-	public void setArticleNo(String articleNo) {
+	public void setArticleNo(int articleNo) {
 		this.articleNo = articleNo;
 	}
 	public String getTitle() {
