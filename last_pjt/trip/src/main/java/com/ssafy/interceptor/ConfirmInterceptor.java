@@ -13,17 +13,17 @@ import org.springframework.web.servlet.HandlerInterceptor;
 @Component
 public class ConfirmInterceptor implements HandlerInterceptor {
 
-	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-			throws Exception {
-		Cookie[] list = request.getCookies();
-		for (Cookie cookie : list) {
-			System.out.println(cookie.getValue());
-			if (!cookie.getValue().equals("admin")) {
-				return false;
-			}
-		}
-		return true;
-	}
+//	@Override
+//	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+//			throws Exception {
+//		Cookie[] list = request.getCookies();
+//		for (Cookie cookie : list) {
+//			System.out.println(cookie.getValue());
+//			if (!cookie.getValue().equals("admin")) {
+//				return false;
+//			}
+//		}
+//		return true;
+//	}
 
 }

@@ -67,10 +67,13 @@ public class UserController {
 
 	@GetMapping("/member")
 	public ResponseEntity<?> userList() throws Exception {
+		
 		List<User> list = userService.listMember();
 		if (list != null && !list.isEmpty()) {
+			System.out.println("컨트롤러 실행");
 			return new ResponseEntity<List<User>>(list, HttpStatus.OK); // 200
 		} else {
+			System.out.println("컨트롤러 실행 _ 빈 정보");
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT); // 204
 		}
 	}

@@ -31,6 +31,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<User> listMember() throws Exception {
+		System.out.println(userMapper.listMember());
 		return userMapper.listMember();
 	}
 
