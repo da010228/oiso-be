@@ -20,15 +20,14 @@
 	<select id="getBoard" resultMap="board">
 		SELECT articleNo, title, id, content, regTime
 		FROM board
-		where articlNo = #{articleNo}
+		where articleNo = #{articleNo}
 	</select>
 	
 	<update id="putBoard">
 		UPDATE board
-		<trim prefix="set" suffixOverrides=",">
-			<if test="title != null"> title = #{title}</if>
-			<if test="content != null"> content = #{content}</if>
-		</trim>
+		SET
+			title = #{title},
+			content = #{content}
 		WHERE articleNo = #{articleNo}
 	</update>
 	
@@ -39,8 +38,8 @@
 	</delete>
 	
 	<insert id="postBoard">
-		insert into board (id, title, content, regTime)
-		values (#{id}, #{title}, #{content}, #{regTime})
+		insert into board (id, title, content)
+		values (#{id}, #{title}, #{content})
 	</insert>
 	
 	

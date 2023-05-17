@@ -37,6 +37,7 @@ public class ArticleController {
 	}
 	@PutMapping("/board/{articleNo}")
 	int putBoard(@RequestBody Article article) throws Exception {
+		System.out.println(article);
 		int cnt = service.putBoard(article);
 		return cnt;
 	}
@@ -45,7 +46,7 @@ public class ArticleController {
 		int cnt = service.delBoard(articleNo);
 		return cnt;
 	}
-	@PostMapping("/board")
+	@PostMapping("/board/new")
 	int postBoard(@RequestBody Article article) throws Exception{
 		int cnt = service.postBoard(article);
 		return cnt;
