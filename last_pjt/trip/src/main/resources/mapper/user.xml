@@ -13,14 +13,19 @@
 		<result column="email" property="emailId" />
 		<result column="domain" property="emailDomain" />
 	</resultMap>
-
+	
+	<select id="userInfo" resultMap="userAll">
+		SELECT id, pw, email, domain
+		FROM user
+		WHERE id = #{userId}
+	</select>
+	
 	<select id="loginMember" resultMap="user">
 		SELECT id, pw
 		FROM user
 		WHERE
 		id = #{userId} AND pw = #{userPwd}
 	</select>
-
 
 	<insert id="joinMember">
 		insert into user (id, pw, email, domain)
@@ -49,5 +54,11 @@
 		WHERE id = #{userId}
 	</delete>
 
+	<!-- 토큰 갱신 -->
+	<update id="updateTokenByUserId">
+		UPDATE user
+		SET token = #{token}
+		WHERE id = #{id}
+	</update>
 
 </mapper>

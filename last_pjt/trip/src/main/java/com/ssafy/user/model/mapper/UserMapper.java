@@ -1,6 +1,7 @@
 package com.ssafy.user.model.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,5 +14,7 @@ public interface UserMapper {
 	List<User> listMember() throws Exception;
 	void updateMember(User user) throws Exception;
 	void deleteMember(String userId) throws Exception;
+	void updateTokenByUserId(Map<String, String> params);
+	User userInfo(String userId);
 
 }

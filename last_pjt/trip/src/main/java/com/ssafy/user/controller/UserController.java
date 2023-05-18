@@ -1,6 +1,10 @@
 package com.ssafy.user.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.user.model.User;
+import com.ssafy.user.model.service.JwtService;
 import com.ssafy.user.model.service.UserService;
 
 @RestController
@@ -26,10 +31,12 @@ public class UserController {
 	private final Logger logger = LoggerFactory.getLogger(UserController.class);
 
 	private UserService userService;
+	private JwtService jwtService;
 
-	public UserController(UserService memberService) {
+	public UserController(UserService memberService, JwtService jwtService) {
 		super();
 		this.userService = memberService;
+		this.jwtService = jwtService;
 	}
 
 	@PostMapping("/signup")
@@ -38,27 +45,62 @@ public class UserController {
 		System.out.println(user.toString());
 		try {
 			int cnt = userService.joinMember(user);
-			System.out.println("asdhflkjsdfhk");
 			return new ResponseEntity<Integer>(cnt, HttpStatus.OK); // 200
 		} catch (Exception e) {
 			e.printStackTrace();
-//			model.addAttribute("msg", "회원 가입 중 문제 발생!!!");
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT); // 204
 		}
 	}
 
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody User user) {
-		User user2 = null;
-		System.out.println(user.getUserId()+" "+ user.getUserPwd());
 		logger.debug("userid : {}, userpwd : {}", user.getUserId(), user.getUserPwd());
 		try {
-			user2 = userService.loginMember(user.getUserId(), user.getUserPwd());
-			if(user2 == null) {
+			User loginUser = userService.loginMember(user.getUserId(), user.getUserPwd());
+			if (loginUser == null) {
 				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT); // 204
 			}
-			return new ResponseEntity<User>(user2, HttpStatus.OK); // 200
 
+			// Access토큰 생성
+			String accessToken = jwtService.create("userid", loginUser.getUserId(), "access-token",
+					1000 * 10 /* 10초 */);
+			// Refresh토큰 생성
+			String refreshToken = jwtService.create("userid", loginUser.getUserId(), "access-token",
+					1000 * 30 /* 30초 */);
+
+			// refreshToken DB 저장
+			userService.updateTokenByUserId(loginUser.getUserId(), refreshToken);
+
+			Map<String, String> resultMap = new HashMap<>();
+			resultMap.put("access-token", accessToken);
+			resultMap.put("refresh-token", refreshToken);
+
+			return new ResponseEntity<Map<String, String>>(resultMap, HttpStatus.OK); // 200
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED); // 401
+		}
+	}
+
+	@GetMapping("/info/{userId}")
+	public ResponseEntity<?> getInfo(@PathVariable String userId, HttpServletRequest request) {
+		String accessToken = request.getHeader("access-token");
+		try {
+			if (jwtService.checkToken(accessToken)) { //토큰에 이상 없으면
+				System.out.println(userId);
+				User user = userService.userInfo(userId);
+				if(user!=null) {
+					Map<String, Object> resultMap = new HashMap<>();
+					resultMap.put("userInfo", user);
+					return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK); // 200
+				}
+				else {
+					return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED); // 401
+				}
+			}
+
+			return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED); // 401
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT); // 204
@@ -67,7 +109,7 @@ public class UserController {
 
 	@GetMapping("/member")
 	public ResponseEntity<?> userList() throws Exception {
-		
+
 		List<User> list = userService.listMember();
 		if (list != null && !list.isEmpty()) {
 			System.out.println("컨트롤러 실행");
@@ -77,30 +119,27 @@ public class UserController {
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT); // 204
 		}
 	}
-	
+
 	@PutMapping("/member/{userId}")
 	public ResponseEntity<?> userModify(@RequestBody User memberDto, @PathVariable String userId) throws Exception {
 		userService.updateMember(memberDto);
 		List<User> list = userService.listMember();
 		if (list != null && !list.isEmpty()) {
 			return new ResponseEntity<List<User>>(list, HttpStatus.OK); // 200
-		}
-		else {
+		} else {
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT); // 204
 		}
 	}
-	
+
 	@DeleteMapping("/member/{userId}")
 	public ResponseEntity<?> userDelete(@PathVariable String userId) throws Exception {
 		userService.deleteMember(userId);
 		List<User> list = userService.listMember();
 		if (list != null && !list.isEmpty()) {
 			return new ResponseEntity<List<User>>(list, HttpStatus.OK); // 200
-		}
-		else {
+		} else {
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT); // 204
 		}
 	}
-
 
 }
