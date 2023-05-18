@@ -88,7 +88,6 @@ public class UserController {
 		String accessToken = request.getHeader("access-token");
 		try {
 			if (jwtService.checkToken(accessToken)) { //토큰에 이상 없으면
-				System.out.println(userId);
 				User user = userService.userInfo(userId);
 				if(user!=null) {
 					Map<String, Object> resultMap = new HashMap<>();
