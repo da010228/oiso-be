@@ -1,5 +1,7 @@
 package com.ssafy.article.model;
 
+import java.util.List;
+
 public class Article {
 
 	private int articleNo;
@@ -7,11 +9,12 @@ public class Article {
 	private String id;
 	private String content;
 	private String regTime;
+	private List<FileInfo> fileInfos;
 	
 	public Article() {
 		super();
 	}
-	public Article(int articleNo, String title, String id, String content, String regTime) {
+	public Article(int articleNo, String title, String id, String content, String regTime, List<FileInfo> fileInfos) {
 		super();
 		this.articleNo = articleNo;
 		this.title = title;
@@ -60,11 +63,17 @@ public class Article {
 	public void setRegTime(String regTime) {
 		this.regTime = regTime;
 	}
+	public List<FileInfo> getFileInfos() {
+		return fileInfos;
+	}
+	public void setFileInfos(List<FileInfo> fileInfos) {
+		this.fileInfos = fileInfos;
+	}
+
 	@Override
 	public String toString() {
 		return "Article [articleNo=" + articleNo + ", title=" + title + ", id=" + id + ", content=" + content
 				+ ", regTime=" + regTime + "]";
-	}
-	
+	}	
 
 }

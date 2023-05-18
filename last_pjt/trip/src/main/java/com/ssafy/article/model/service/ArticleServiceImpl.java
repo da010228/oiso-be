@@ -2,15 +2,15 @@ package com.ssafy.article.model.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ssafy.article.model.Article;
 import com.ssafy.article.model.mapper.ArticleMapper;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
-	
+
 	private ArticleMapper articleMapper;
 
 	public ArticleServiceImpl(ArticleMapper articleMapper) {
@@ -38,7 +38,17 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public int postBoard(Article article) throws Exception {
+	public int postBoard(Article article, MultipartFile file) throws Exception {
+		if (file != null && !file.isEmpty()) {
+			// 파일 처리 로직
+			// 예시: 파일을 저장하거나 처리하는 작업을 수행합니다.
+			// 이 예시에서는 파일의 이름을 출력하는 것으로 가정합니다.
+			String fileName = file.getOriginalFilename();
+			System.out.println("Uploaded file name: " + fileName);
+
+			// 파일 저장 등의 추가적인 작업을 수행합니다.
+			
+		}
 		return articleMapper.postBoard(article);
 	}
 
