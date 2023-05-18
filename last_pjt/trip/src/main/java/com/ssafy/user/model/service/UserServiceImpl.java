@@ -1,6 +1,8 @@
 package com.ssafy.user.model.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -43,6 +45,20 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void deleteMember(String userId) throws Exception {
 		userMapper.deleteMember(userId);
+	}
+
+	@Override
+	public void updateTokenByUserId(String userId, String refreshToken) {
+		Map<String, String> params = new HashMap<>();
+		params.put("id", userId);
+		params.put("token", refreshToken);
+		userMapper.updateTokenByUserId(params);
+		
+	}
+
+	@Override
+	public User userInfo(String userId) {
+		return userMapper.userInfo(userId);
 	}
 
 }

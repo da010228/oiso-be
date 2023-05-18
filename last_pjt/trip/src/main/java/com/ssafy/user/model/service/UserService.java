@@ -10,6 +10,8 @@ public interface UserService {
 	List<User> listMember() throws Exception;
 	void updateMember(User user) throws Exception;
 	void deleteMember(String userId) throws Exception;
+	void updateTokenByUserId(String userId, String refreshToken);
+	User userInfo(String id);
 	
 
 }
