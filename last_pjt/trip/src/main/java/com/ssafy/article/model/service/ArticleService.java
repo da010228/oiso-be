@@ -15,7 +15,7 @@ public interface ArticleService {
 
 	int delBoard(int articleNo) throws Exception;
 
-	int postBoard(Article article, MultipartFile file) throws Exception;
+	int postBoard(Article article) throws Exception;
 
 	List<Article> getHotplaceList() throws Exception;
 
