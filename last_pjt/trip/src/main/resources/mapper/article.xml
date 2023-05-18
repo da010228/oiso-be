@@ -10,6 +10,7 @@
 		<result column="id" property="id"/>
 		<result column="content" property="content"/>
 		<result column="regTime" property="regTime"/>
+		<collection property="fileInfos" column="articleNo" javaType="list" ofType="FileInfo" select="fileInfoList"/>
 	</resultMap>
 
 	<select id="getBoardList" resultMap="board">
@@ -40,6 +41,17 @@
 	<insert id="postBoard">
 		insert into board (id, title, content)
 		values (#{id}, #{title}, #{content})
+		<selectKey resultType="int" keyProperty="articleNo" order="AFTER">
+		SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<insert id="fileRegister" parameterType="Article">
+		insert into file_info (article_no, save_folder, original_file, save_file)
+		values
+		<foreach collection="fileInfos" item="fileinfo" separator=" , ">
+			(#{articleNo}, #{fileinfo.saveFolder}, #{fileinfo.originFile}, #{fileinfo.saveFile})
+		</foreach>
 	</insert>
 	
 	

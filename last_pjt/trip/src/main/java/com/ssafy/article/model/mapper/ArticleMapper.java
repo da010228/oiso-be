@@ -15,6 +15,7 @@ public interface ArticleMapper {
 	int putBoard(Article article) throws Exception;
 	int delBoard(int articleNo) throws Exception;
 	int postBoard(Article article) throws Exception;
+	int fileRegister(Article article) throws Exception;
 	
 	List<Article> getHotplaceList() throws Exception;
 	Article getHotplace(int articleNo) throws Exception;

@@ -1,7 +1,15 @@
 package com.ssafy.article.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ssafy.article.model.Article;
+import com.ssafy.article.model.FileInfo;
 import com.ssafy.article.model.service.ArticleService;
 
 @RestController
@@ -53,10 +62,43 @@ public class ArticleController {
 	}
 
 	@PostMapping("/board/new")
-	int postBoard(@RequestPart(value = "key") Article article, @RequestPart(value = "file",required = false) MultipartFile file)
-			throws Exception {
-		System.out.println("article : " + article + ", file : " + file);
-		int cnt = service.postBoard(article, file);
+	int postBoard(@RequestPart(value = "key") Article article,
+			@RequestPart(value = "files", required = false) MultipartFile[] files) throws Exception {
+		System.out.println("article : " + article + ", files : " + files);
+		String realPath = "/Users/hvvany/Desktop/OISO_BE/last_pjt/trip/src/main/resources/static/imgs";
+		String today = new SimpleDateFormat("yyMMdd").format(new Date());
+		File folder = new File(realPath);
+		if (!folder.exists()) {
+			folder.mkdirs();
+		}
+		List<FileInfo> fileInfos = new ArrayList<FileInfo>();
+		for (MultipartFile mfile : files) {
+			FileInfo fileInfo = new FileInfo();
+			String originalFileName = mfile.getOriginalFilename();
+			if (!originalFileName.isEmpty()) {
+				String saveFileName = UUID.randomUUID().toString()
+						+ originalFileName.substring(originalFileName.lastIndexOf('.'));
+				fileInfo.setSaveFolder(today);
+				fileInfo.setOriginFile(originalFileName);
+				fileInfo.setSaveFile(saveFileName);
+				System.out.println(mfile.getOriginalFilename() + "   " + saveFileName);
+				System.out.println("여기까지는 오나?");
+				System.out.println(folder.getPath());
+//				mfile.transferTo(new File(folder,saveFileName));
+//				File destinationFile = new File(fileUrl + destinationFileName);
+//	            destinationFile.getParentFile().mkdirs();
+//	            file.transferTo(destinationFile);
+//	            Image image = new Image(destinationFileName, sourceFileName, fileUrl);
+				FileCopyUtils.copy(mfile.getInputStream(), new FileOutputStream(Paths.get(saveFileName).toFile()));
+				System.out.println("여기까지는 진짜 오나?");
+				System.out.println(Paths.get(saveFileName));
+
+			}
+			fileInfos.add(fileInfo);
+		}
+		article.setFileInfos(fileInfos);
+		System.out.println(realPath);
+		int cnt = service.postBoard(article);
 		return cnt;
 	}
 

@@ -21,6 +21,7 @@ public class Article {
 		this.id = id;
 		this.content = content;
 		this.regTime = regTime;
+		this.fileInfos = fileInfos;
 	}
 	public Article( String title, String content) {
 		super();
