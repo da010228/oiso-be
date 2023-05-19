@@ -4,7 +4,9 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
@@ -22,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.ssafy.article.model.Article;
 import com.ssafy.article.model.FileInfo;
 import com.ssafy.article.model.service.ArticleService;
@@ -29,10 +33,10 @@ import com.ssafy.article.model.service.ArticleService;
 @RestController
 @RequestMapping("/article")
 public class ArticleController {
-	
+
 	@Autowired
 	private ServletContext servletContext;
-	
+
 	@Value("${file.imgPath}")
 	private String uploadImgPath;
 
@@ -48,7 +52,7 @@ public class ArticleController {
 		List<Article> list = service.getBoardList();
 		return list;
 	}
-	
+
 //	@GetMapping("/board/imgs")
 //	public List<Article> fileInfoList() throws Exception {
 //		List<Article> list = service.fileInfoList();
@@ -75,36 +79,9 @@ public class ArticleController {
 	}
 
 	@PostMapping("/board/new")
-	int postBoard(@RequestPart(value = "key") Article article,
-			@RequestPart(value = "files", required = false) MultipartFile[] files) throws Exception {
-		String realPath = servletContext.getRealPath("/upload");
-		String today = new SimpleDateFormat("yyMMdd").format(new Date());
-		File folder = new File(realPath);
-		if (!folder.exists()) {
-			folder.mkdirs();
-		}
-		if (files != null) {
-			List<FileInfo> fileInfos = new ArrayList<FileInfo>();
-			for (MultipartFile mfile : files) {
-				FileInfo fileInfo = new FileInfo();
-				String originalFileName = mfile.getOriginalFilename();
-				if (!originalFileName.isEmpty()) {
-					String saveFileName = UUID.randomUUID().toString()
-							+ originalFileName.substring(originalFileName.lastIndexOf('.'));
-					fileInfo.setSaveFolder(realPath);
-					fileInfo.setOriginFile(originalFileName);
-					fileInfo.setSaveFile(saveFileName);
-					System.out.println(mfile.getOriginalFilename() + "   " + saveFileName);
-					System.out.println(folder.getPath());
-					mfile.transferTo(new File(folder, saveFileName));
-
-				}
-				fileInfos.add(fileInfo);
-			}
-			article.setFileInfos(fileInfos);
-		}
-		int cnt = service.postBoard(article);
-		return cnt;
+	int postBoard(@RequestBody Article article) throws Exception {
+		System.out.println(article);
+		return service.postBoard(article);
 	}
 
 	@GetMapping("/hotplace")

@@ -34,6 +34,12 @@ public class Article {
 		this.id = id;
 		this.content = content;
 	}
+	public Article( String title, String id, String content, List<FileInfo> fileInfos) {
+		this.title = title;
+		this.id = id;
+		this.content = content;
+		this.fileInfos = fileInfos;
+	}
 	public int getArticleNo() {
 		return articleNo;
 	}
@@ -70,11 +76,11 @@ public class Article {
 	public void setFileInfos(List<FileInfo> fileInfos) {
 		this.fileInfos = fileInfos;
 	}
-
 	@Override
 	public String toString() {
 		return "Article [articleNo=" + articleNo + ", title=" + title + ", id=" + id + ", content=" + content
-				+ ", regTime=" + regTime + "]";
-	}	
+				+ ", regTime=" + regTime + ", fileInfos=" + fileInfos + "]";
+	}
+
 
 }

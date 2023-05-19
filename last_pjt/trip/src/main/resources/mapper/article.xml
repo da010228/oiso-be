@@ -14,9 +14,9 @@
 	</resultMap>
 	
 	<resultMap type="FileInfo" id="file">
-		<result column="save_folder" property="saveFolder"/>
-		<result column="original_file" property="originFile"/>
-		<result column="save_file" property="saveFile"/>
+		<result column="origin_name" property="originName"/>
+		<result column="online_path" property="onlinePath"/>
+		<result column="delete_path" property="deletePath"/>
 	</resultMap>
 
 	<select id="getBoardList" resultMap="board">
@@ -24,7 +24,7 @@
 		FROM board
 	</select>
  	<select id="fileInfoList" resultType="FileInfo" resultMap="file">
-		SELECT save_folder, original_file, save_file
+		SELECT origin_name, online_path, delete_path
 		FROM file_info
 		WHERE article_no = #{articleNo}
 	</select>
@@ -58,10 +58,10 @@
 	</insert>
 	
 	<insert id="fileRegister" parameterType="Article">
-		insert into file_info (article_no, save_folder, original_file, save_file)
+		insert into file_info (article_no, origin_name, online_path, delete_path)
 		values
 		<foreach collection="fileInfos" item="fileinfo" separator=" , ">
-			(#{articleNo}, #{fileinfo.saveFolder}, #{fileinfo.originFile}, #{fileinfo.saveFile})
+			(#{articleNo}, #{fileinfo.originName}, #{fileinfo.onlinePath}, #{fileinfo.deletePath})
 		</foreach>
 	</insert>
 	

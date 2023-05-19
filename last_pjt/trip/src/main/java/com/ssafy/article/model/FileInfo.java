@@ -2,47 +2,40 @@ package com.ssafy.article.model;
 
 public class FileInfo {
 
-	private String saveFolder;
-	private String originFile;
-	private String saveFile;
+	private String originName;
+	private String onlinePath;
+	private String deletePath;
 
-	public FileInfo() {
+	public FileInfo(String originName, String onlinePath, String deletePath) {
 		super();
+		this.originName = originName;
+		this.onlinePath = onlinePath;
+		this.deletePath = deletePath;
 	}
 
-	public FileInfo(String saveFolder, String originFile, String saveFile) {
-		this.saveFolder = saveFolder;
-		this.originFile = originFile;
-		this.saveFile = saveFile;
+	public String getOriginName() {
+		return originName;
 	}
-
-	public String getSaveFolder() {
-		return saveFolder;
+	public void setOriginName(String originName) {
+		this.originName = originName;
 	}
-
-	public void setSaveFolder(String saveFolder) {
-		this.saveFolder = saveFolder;
+	public String getOnlinePath() {
+		return onlinePath;
 	}
-
-	public String getOriginFile() {
-		return originFile;
+	public void setOnlinePath(String onlinePath) {
+		this.onlinePath = onlinePath;
 	}
-
-	public void setOriginFile(String originFile) {
-		this.originFile = originFile;
+	public String getDeletePath() {
+		return deletePath;
 	}
-
-	public String getSaveFile() {
-		return saveFile;
-	}
-
-	public void setSaveFile(String saveFile) {
-		this.saveFile = saveFile;
+	public void setDeletePath(String deletePath) {
+		this.deletePath = deletePath;
 	}
 
 	@Override
 	public String toString() {
-		return "FileInfo [saveFolder=" + saveFolder + ", originFile=" + originFile + ", saveFile=" + saveFile + "]";
+		return "FileInfo [originName=" + originName + ", onlinePath=" + onlinePath + ", deletePath=" + deletePath + "]";
 	}
-	
+
+
 }
