@@ -46,14 +46,13 @@ public class ArticleServiceImpl implements ArticleService {
 			// 파일 처리 로직
 			// 예시: 파일을 저장하거나 처리하는 작업을 수행합니다.
 			// 이 예시에서는 파일의 이름을 출력하는 것으로 가정합니다.
-			for (int i = 0; i < file.size(); i++) {
-				String fileName = file.get(i).getOriginFile();
-				System.out.println("Uploaded file name: " + fileName);
-			}
+			
 			// 파일 저장 등의 추가적인 작업을 수행합니다.
-			return articleMapper.postBoard(article) & articleMapper.fileRegister(article);
+			articleMapper.fileRegister(article);
+			return articleMapper.postBoard(article);
 		}
-		return 0;
+		return articleMapper.postBoard(article);
+
 	}
 
 	@Override

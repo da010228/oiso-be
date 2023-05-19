@@ -64,33 +64,32 @@ public class ArticleController {
 	@PostMapping("/board/new")
 	int postBoard(@RequestPart(value = "key") Article article,
 			@RequestPart(value = "files", required = false) MultipartFile[] files) throws Exception {
-		System.out.println("article : " + article + ", files : " + files);
 		String realPath = "C:\\SSAFY\\OISO_imgs";
 		String today = new SimpleDateFormat("yyMMdd").format(new Date());
 		File folder = new File(realPath);
 		if (!folder.exists()) {
 			folder.mkdirs();
 		}
-		List<FileInfo> fileInfos = new ArrayList<FileInfo>();
-		for (MultipartFile mfile : files) {
-			FileInfo fileInfo = new FileInfo();
-			String originalFileName = mfile.getOriginalFilename();
-			if (!originalFileName.isEmpty()) {
-				String saveFileName = UUID.randomUUID().toString()
-						+ originalFileName.substring(originalFileName.lastIndexOf('.'));
-				fileInfo.setSaveFolder(realPath);
-				fileInfo.setOriginFile(originalFileName);
-				fileInfo.setSaveFile(saveFileName);
-				System.out.println(mfile.getOriginalFilename() + "   " + saveFileName);
-				System.out.println(folder.getPath());
-				mfile.transferTo(new File(folder,saveFileName));
-				System.out.println(Paths.get(saveFileName));
+		if (files != null) {
+			List<FileInfo> fileInfos = new ArrayList<FileInfo>();
+			for (MultipartFile mfile : files) {
+				FileInfo fileInfo = new FileInfo();
+				String originalFileName = mfile.getOriginalFilename();
+				if (!originalFileName.isEmpty()) {
+					String saveFileName = UUID.randomUUID().toString()
+							+ originalFileName.substring(originalFileName.lastIndexOf('.'));
+					fileInfo.setSaveFolder(realPath);
+					fileInfo.setOriginFile(originalFileName);
+					fileInfo.setSaveFile(saveFileName);
+					System.out.println(mfile.getOriginalFilename() + "   " + saveFileName);
+					System.out.println(folder.getPath());
+					mfile.transferTo(new File(folder, saveFileName));
 
+				}
+				fileInfos.add(fileInfo);
 			}
-			fileInfos.add(fileInfo);
+			article.setFileInfos(fileInfos);
 		}
-		article.setFileInfos(fileInfos);
-		System.out.println(realPath);
 		int cnt = service.postBoard(article);
 		return cnt;
 	}
