@@ -11,6 +11,7 @@ import com.ssafy.user.model.User;
 @Mapper
 public interface ArticleMapper {
 	List<Article> getBoardList() throws Exception;
+//	List<Article> fileInfoList() throws Exception;
 	Article getBoard(int articleNo) throws Exception;
 	int putBoard(Article article) throws Exception;
 	int delBoard(int articleNo) throws Exception;

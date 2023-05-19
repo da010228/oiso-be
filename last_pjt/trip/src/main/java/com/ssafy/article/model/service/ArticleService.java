@@ -8,6 +8,8 @@ import com.ssafy.article.model.Article;
 
 public interface ArticleService {
 	List<Article> getBoardList() throws Exception;
+	
+//	List<Article> fileInfoList() throws Exception;
 
 	Article getBoard(int articleNo) throws Exception;
 

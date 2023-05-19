@@ -1,15 +1,16 @@
 package com.ssafy.article.controller;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.util.FileCopyUtils;
+import javax.servlet.ServletContext;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +29,12 @@ import com.ssafy.article.model.service.ArticleService;
 @RestController
 @RequestMapping("/article")
 public class ArticleController {
+	
+	@Autowired
+	private ServletContext servletContext;
+	
+	@Value("${file.imgPath}")
+	private String uploadImgPath;
 
 	private ArticleService service;
 
@@ -41,6 +48,12 @@ public class ArticleController {
 		List<Article> list = service.getBoardList();
 		return list;
 	}
+	
+//	@GetMapping("/board/imgs")
+//	public List<Article> fileInfoList() throws Exception {
+//		List<Article> list = service.fileInfoList();
+//		return list;
+//	}
 
 	@GetMapping("/board/{articleNo}")
 	public Article getBoard(@PathVariable int articleNo) throws Exception {
@@ -64,7 +77,7 @@ public class ArticleController {
 	@PostMapping("/board/new")
 	int postBoard(@RequestPart(value = "key") Article article,
 			@RequestPart(value = "files", required = false) MultipartFile[] files) throws Exception {
-		String realPath = "C:\\SSAFY\\OISO_imgs";
+		String realPath = servletContext.getRealPath("/upload");
 		String today = new SimpleDateFormat("yyMMdd").format(new Date());
 		File folder = new File(realPath);
 		if (!folder.exists()) {
