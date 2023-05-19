@@ -11,7 +11,6 @@ public class FileInfo {
 	}
 
 	public FileInfo(String saveFolder, String originFile, String saveFile) {
-		super();
 		this.saveFolder = saveFolder;
 		this.originFile = originFile;
 		this.saveFile = saveFile;

@@ -10,12 +10,23 @@
 		<result column="id" property="id"/>
 		<result column="content" property="content"/>
 		<result column="regTime" property="regTime"/>
-<!-- 		<collection property="fileInfos" column="articleNo" javaType="list" ofType="FileInfo" select="fileInfoList"/>
- -->	</resultMap>
+  		<collection property="fileInfos" column="articleNo" javaType="list" ofType="FileInfo" select="fileInfoList"/>
+	</resultMap>
+	
+	<resultMap type="FileInfo" id="file">
+		<result column="save_folder" property="saveFolder"/>
+		<result column="original_file" property="originFile"/>
+		<result column="save_file" property="saveFile"/>
+	</resultMap>
 
 	<select id="getBoardList" resultMap="board">
 		SELECT articleNo, title, id, content, regTime
 		FROM board
+	</select>
+ 	<select id="fileInfoList" resultType="FileInfo" resultMap="file">
+		SELECT save_folder, original_file, save_file
+		FROM file_info
+		WHERE article_no = #{articleNo}
 	</select>
 	
 	<select id="getBoard" resultMap="board">

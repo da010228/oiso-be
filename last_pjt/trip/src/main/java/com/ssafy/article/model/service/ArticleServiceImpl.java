@@ -20,8 +20,14 @@ public class ArticleServiceImpl implements ArticleService {
 
 	@Override
 	public List<Article> getBoardList() throws Exception {
+		System.out.println(articleMapper.getBoardList());
 		return articleMapper.getBoardList();
 	}
+
+//	@Override
+//	public List<Article> fileInfoList() throws Exception {
+//		return articleMapper.fileInfoList();
+//	}
 
 	@Override
 	public Article getBoard(int articleNo) throws Exception {
@@ -46,14 +52,14 @@ public class ArticleServiceImpl implements ArticleService {
 			// 파일 처리 로직
 			// 예시: 파일을 저장하거나 처리하는 작업을 수행합니다.
 			// 이 예시에서는 파일의 이름을 출력하는 것으로 가정합니다.
-			
+
 			// 파일 저장 등의 추가적인 작업을 수행합니다.
-			articleMapper.fileRegister(article);
-			return articleMapper.postBoard(article);
+			return articleMapper.postBoard(article) & articleMapper.fileRegister(article);
 		}
 		return articleMapper.postBoard(article);
 
 	}
+	
 
 	@Override
 	public List<Article> getHotplaceList() throws Exception {
@@ -114,5 +120,6 @@ public class ArticleServiceImpl implements ArticleService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 
 }
