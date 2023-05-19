@@ -10,8 +10,8 @@
 		<result column="id" property="id"/>
 		<result column="content" property="content"/>
 		<result column="regTime" property="regTime"/>
-		<collection property="fileInfos" column="articleNo" javaType="list" ofType="FileInfo" select="fileInfoList"/>
-	</resultMap>
+<!-- 		<collection property="fileInfos" column="articleNo" javaType="list" ofType="FileInfo" select="fileInfoList"/>
+ -->	</resultMap>
 
 	<select id="getBoardList" resultMap="board">
 		SELECT articleNo, title, id, content, regTime
