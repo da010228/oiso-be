@@ -65,7 +65,7 @@ public class ArticleController {
 	int postBoard(@RequestPart(value = "key") Article article,
 			@RequestPart(value = "files", required = false) MultipartFile[] files) throws Exception {
 		System.out.println("article : " + article + ", files : " + files);
-		String realPath = "/Users/hvvany/Desktop/OISO_BE/last_pjt/trip/src/main/resources/static/imgs";
+		String realPath = "C:\\SSAFY\\OISO_imgs";
 		String today = new SimpleDateFormat("yyMMdd").format(new Date());
 		File folder = new File(realPath);
 		if (!folder.exists()) {
@@ -78,19 +78,12 @@ public class ArticleController {
 			if (!originalFileName.isEmpty()) {
 				String saveFileName = UUID.randomUUID().toString()
 						+ originalFileName.substring(originalFileName.lastIndexOf('.'));
-				fileInfo.setSaveFolder(today);
+				fileInfo.setSaveFolder(realPath);
 				fileInfo.setOriginFile(originalFileName);
 				fileInfo.setSaveFile(saveFileName);
 				System.out.println(mfile.getOriginalFilename() + "   " + saveFileName);
-				System.out.println("여기까지는 오나?");
 				System.out.println(folder.getPath());
-//				mfile.transferTo(new File(folder,saveFileName));
-//				File destinationFile = new File(fileUrl + destinationFileName);
-//	            destinationFile.getParentFile().mkdirs();
-//	            file.transferTo(destinationFile);
-//	            Image image = new Image(destinationFileName, sourceFileName, fileUrl);
-				FileCopyUtils.copy(mfile.getInputStream(), new FileOutputStream(Paths.get(saveFileName).toFile()));
-				System.out.println("여기까지는 진짜 오나?");
+				mfile.transferTo(new File(folder,saveFileName));
 				System.out.println(Paths.get(saveFileName));
 
 			}
