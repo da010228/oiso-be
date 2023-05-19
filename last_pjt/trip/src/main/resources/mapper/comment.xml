@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.ssafy.comment.model.mapper.CommentMapper">
+
+	<resultMap type="Comment" id="board">
+		<result column="commentNo" property="commentNo" />
+		<result column="id" property="id" />
+		<result column="comment" property="comment" />
+		<result column="commentTime" property="commentTime" />
+		<result column="articleNo" property="articleNo" />
+	</resultMap>
+	
+	<resultMap type="Comment" id="hotplace">
+		<result column="commentNo" property="commentNo" />
+		<result column="id" property="id" />
+		<result column="comment" property="comment" />
+		<result column="commentTime" property="commentTime" />
+		<result column="hotplaceNo" property="articleNo" />
+	</resultMap>
+
+	<!-- articleNo에 해당하는 댓글 조회 -->
+	<select id="getCommentList" resultMap="board">
+		SELECT commentNo, id,
+		comment, commentTime, articleNo
+		FROM comment_board
+		WHERE articleNo =
+		#{articleNo}
+		ORDER BY commentTime ASC
+	</select>
+
+	<!-- 댓글 등록 -->
+	<insert id="postComment">
+		INSERT INTO comment_board(id, comment, articleNo)
+		VALUES (#{id}, #{comment}, #{articleNo})
+	</insert>
+
+	<!-- 댓글 수정 -->
+	<update id="putComment">
+		UPDATE comment_board
+		SET comment = #{comment}
+		WHERE
+		commentNo = #{commentNo}
+	</update>
+
+	<!-- 댓글 삭제 -->
+	<delete id="delComment">
+		DELETE
+		FROM comment_board
+		WHERE commentNo =
+		#{commentNo}
+	</delete>
+
+	<!-- 핫플레이스 -->
+	<select id="getCommentListHot" resultMap="hotplace">
+		SELECT commentNo, id,
+		comment, commentTime, hotplaceNo
+		FROM comment_hotplace
+		WHERE hotplaceNo =
+		#{articleNo}
+		ORDER BY commentTime ASC
+	</select>
+
+	<insert id="postCommentHot">
+		INSERT INTO comment_hotplace(id, comment, hotplaceNo)
+		VALUES (#{id}, #{comment}, #{articleNo})
+	</insert>
+
+	<update id="putCommentHot">
+		UPDATE comment_hotplace
+		SET comment = #{comment}
+		WHERE
+		commentNo = #{commentNo}
+	</update>
+
+	<delete id="delCommentHot">
+		DELETE
+		FROM comment_hotplace
+		WHERE commentNo =
+		#{commentNo}
+	</delete>
+
+</mapper>
