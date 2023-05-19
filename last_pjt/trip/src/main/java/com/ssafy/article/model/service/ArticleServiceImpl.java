@@ -24,11 +24,6 @@ public class ArticleServiceImpl implements ArticleService {
 		return articleMapper.getBoardList();
 	}
 
-//	@Override
-//	public List<Article> fileInfoList() throws Exception {
-//		return articleMapper.fileInfoList();
-//	}
-
 	@Override
 	public Article getBoard(int articleNo) throws Exception {
 		return articleMapper.getBoard(articleNo);
