@@ -4,29 +4,36 @@
 
 <mapper namespace="com.ssafy.trip.model.mapper.TripMapper">
 
-	<resultMap type="Trip" id="trip">
-		<result column="content_id" property="content_id"/>
-		<result column="content_type_id" property="content_type_id"/>
-		<result column="title" property="title"/>
-		<result column="addr1" property="addr1"/>
-		<result column="first_image" property="first_image"/>
+	<resultMap type="MyTripDetail" id="tripdetail">
+		<result column="detailNo" property="detailNo"/>
+		<result column="contentId" property="contentId"/>
+		<result column="contentTypeId" property="contentTypeId"/>
+		<result column="mytripNo" property="mytripNo"/>
+		<result column="day" property="day"/>
+	</resultMap>
+	
+	<resultMap type="MyTrip" id="trip">
+		<result column="mytripNo" property="mytripNo"/>
+		<result column="id" property="id"/>
 		<result column="sido_code" property="sido_code"/>
-		<result column="gugun_code" property="gugun_code"/>
-		<result column="latitude" property="latitude"/>
-		<result column="longitude" property="longitude"/>
-		<result column="readcount" property="readcount"/>
+		<result column="title" property="title"/>
+		<result column="regTime" property="regTime"/>
+		<result column="startPeriod" property="startPeriod"/>
+		<result column="endPeriod" property="endPeriod"/>
 	</resultMap>
 
-	<select id="listTrip" resultMap="trip">
-		SELECT content_id, content_type_id, title, addr1, first_image, readcount, sido_code, gugun_code, latitude, longitude
-		FROM attraction_info
-		WHERE content_type_id = #{content_type_id} AND sido_code = #{sido_code}
+	<select id="getMyTripList" resultMap="trip">
+		SELECT mytripNo, id, sido_code, title, regTime, startPeriod, endPeriod
+		FROM mytrip
+		WHERE id = #{id}
 	</select>
 	
-	<select id="hotTrip" resultMap="trip">
-		SELECT content_id, content_type_id, title, addr1, first_image, readcount, sido_code, gugun_code, latitude, longitude
-		FROM attraction_info
-		ORDER BY readcount DESC
+	
+	<select id="getMyTripDetailList" resultMap="tripdetail">
+		SELECT detailNo, contentId, contentTypeId, mytripNo, day
+		FROM mytrip_list
+		where mytripNo = #{mytripNo}
 	</select>
+	
 	
 </mapper>
