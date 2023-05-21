@@ -5,8 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.ssafy.article.model.Article;
-import com.ssafy.trip.model.Trip;
-import com.ssafy.user.model.User;
 
 @Mapper
 public interface ArticleMapper {

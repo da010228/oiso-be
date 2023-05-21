@@ -2,11 +2,12 @@ package com.ssafy.trip.model.service;
 
 import java.util.List;
 
-import com.ssafy.trip.model.Trip;
+import com.ssafy.trip.model.MyTrip;
+import com.ssafy.trip.model.MyTripDetail;
 
 public interface TripService {
 	
-	List<Trip> listTrip(Trip trip) throws Exception;
-	List<Trip> hotTrip() throws Exception;
+	List<MyTrip> getMyTripList(String id) throws Exception;
+	List<MyTripDetail> getMyTripDetailList(int mytripNo) throws Exception;
 	
 }

@@ -4,7 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.ssafy.trip.model.Trip;
+import com.ssafy.trip.model.MyTrip;
+import com.ssafy.trip.model.MyTripDetail;
 import com.ssafy.trip.model.mapper.TripMapper;
 
 @Service
@@ -15,13 +16,12 @@ public class TripServiceImpl implements TripService {
 		this.tripMapper = tripMapper;
 	}
 	@Override
-	public List<Trip> listTrip(Trip trip) throws Exception {
-		return tripMapper.listTrip(trip);
+	public List<MyTrip> getMyTripList(String id) throws Exception {
+		return tripMapper.getMyTripList(id);
 	}
-
 	@Override
-	public List<Trip> hotTrip() throws Exception {
-		return tripMapper.hotTrip();
+	public List<MyTripDetail> getMyTripDetailList(int mytripNo) throws Exception {
+		return tripMapper.getMyTripDetailList(mytripNo);
 	}
 
 }
