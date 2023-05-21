@@ -1,6 +1,10 @@
 # Created by https://www.toptal.com/developers/gitignore/api/windows,macos,vue,eclipse,java
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,macos,vue,eclipse,java
 
+### STS 준환 설정 ###
+
+.properties
+
 ### Eclipse ###
 .metadata
 bin/
