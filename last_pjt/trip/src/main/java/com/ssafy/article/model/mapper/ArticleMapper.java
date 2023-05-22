@@ -25,4 +25,10 @@ public interface ArticleMapper {
 	int postHotplace(Article article) throws Exception;
 	int fileRegisterHotplace(Article article) throws Exception;
 
+//	------------------- 게시판 --------------------
+	List<Article> getBulletinList() throws Exception;
+	Article getBulletin(int articleNo) throws Exception;
+	int putBulletin(Article article) throws Exception;
+	int delBulletin(int articleNo) throws Exception;
+	int postBulletin(Article article) throws Exception;
 }

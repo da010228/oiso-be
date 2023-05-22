@@ -228,6 +228,16 @@ CREATE TABLE IF NOT EXISTS `hotplace` (
   PRIMARY KEY (`hotplaceNo`))
 ENGINE = InnoDB;
 
+DROP TABLE IF EXISTS `bulletin`;
+CREATE TABLE IF NOT EXISTS `bulletin` (
+  `bulletinNo` int NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(100) NOT NULL,
+  `id` VARCHAR(50) NOT NULL,
+  `content` TEXT NULL,
+  `regTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`bulletinNo`))
+ENGINE = InnoDB;
+
 DROP TABLE IF EXISTS `comment_board`;
 CREATE TABLE `comment_board` (
   `commentNo` int NOT NULL AUTO_INCREMENT,

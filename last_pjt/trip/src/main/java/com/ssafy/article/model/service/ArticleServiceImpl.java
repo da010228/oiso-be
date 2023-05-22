@@ -83,5 +83,34 @@ public class ArticleServiceImpl implements ArticleService {
 		}
 		return articleMapper.postHotplace(article);
 	}
+	
+//	-------------------- 게시판 ------------------------
+
+	@Override
+	public List<Article> getBulletinList() throws Exception {
+		System.out.println(articleMapper.getBulletinList());
+		return articleMapper.getBulletinList();
+	}
+
+	@Override
+	public Article getBulletin(int articleNo) throws Exception {
+		return articleMapper.getBulletin(articleNo);
+	}
+
+	@Override
+	public int putBulletin(Article article) throws Exception {
+		return articleMapper.putBulletin(article);
+	}
+
+	@Override
+	public int delBulletin(int articleNo) throws Exception {
+		return articleMapper.delBulletin(articleNo);
+	}
+
+	@Override
+	@Transactional
+	public int postBulletin(Article article) throws Exception {
+		return articleMapper.postBulletin(article);
+	}
 
 }
