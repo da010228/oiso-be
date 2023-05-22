@@ -260,7 +260,7 @@ CREATE TABLE IF NOT EXISTS `mytrip` (
 ENGINE = InnoDB;
 
 insert into mytrip (id, sido_code, title, startPeriod, endPeriod)
-values("ssafy", 12, "나와줄래", 20230520, 20230526);
+values("ssafy", 6, "나와줄래", 20230520, 20230526);
 
 CREATE TABLE IF NOT EXISTS `mytrip_list` (
 `detailNo` int NOT NULL AUTO_INCREMENT,

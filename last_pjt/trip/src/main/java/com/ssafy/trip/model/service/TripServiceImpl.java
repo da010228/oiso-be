@@ -20,8 +20,19 @@ public class TripServiceImpl implements TripService {
 		return tripMapper.getMyTripList(id);
 	}
 	@Override
-	public List<MyTripDetail> getMyTripDetailList(int mytripNo) throws Exception {
-		return tripMapper.getMyTripDetailList(mytripNo);
+	public int postPlan(MyTrip plan) throws Exception {
+		return tripMapper.postPlan(plan);
+	}
+	
+	
+	
+	@Override
+	public List<MyTripDetail> getMyTripDetailList(String id, int sido_code) throws Exception {
+		return tripMapper.getMyTripDetailList(id, sido_code);
+	}
+	@Override
+	public int postDetail(MyTripDetail detail) throws Exception {
+		return tripMapper.postDetail(detail);
 	}
 
 }

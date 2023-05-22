@@ -11,5 +11,9 @@ import com.ssafy.user.model.User;
 @Mapper
 public interface TripMapper {
 	List<MyTrip> getMyTripList(String id) throws Exception;
-	List<MyTripDetail> getMyTripDetailList(int mytripNo) throws Exception;
+	int postPlan(MyTrip plan) throws Exception;
+	
+	
+	List<MyTripDetail> getMyTripDetailList(String id, int sido_code) throws Exception;
+	int postDetail(MyTripDetail detail) throws Exception;	
 }
