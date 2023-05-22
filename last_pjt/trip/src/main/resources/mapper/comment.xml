@@ -2,8 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper
-	namespace="com.ssafy.comment.model.mapper.CommentMapper">
+<mapper namespace="com.ssafy.comment.model.mapper.CommentMapper">
 
 	<resultMap type="Comment" id="board">
 		<result column="commentNo" property="commentNo" />
@@ -12,7 +11,7 @@
 		<result column="commentTime" property="commentTime" />
 		<result column="articleNo" property="articleNo" />
 	</resultMap>
-	
+
 	<resultMap type="Comment" id="hotplace">
 		<result column="commentNo" property="commentNo" />
 		<result column="id" property="id" />
@@ -53,21 +52,23 @@
 		#{commentNo}
 	</delete>
 
-	<!-- 핫플레이스 -->
+
+	<!-- hotplaceNo에 해당하는 댓글 조회 -->
 	<select id="getCommentListHot" resultMap="hotplace">
 		SELECT commentNo, id,
-		comment, commentTime, hotplaceNo
+		comment, commentTime, hotplaceNo AS articleNo
 		FROM comment_hotplace
-		WHERE hotplaceNo =
-		#{articleNo}
+		WHERE hotplaceNo = #{articleNo}
 		ORDER BY commentTime ASC
 	</select>
 
+	<!-- 댓글 등록 -->
 	<insert id="postCommentHot">
 		INSERT INTO comment_hotplace(id, comment, hotplaceNo)
 		VALUES (#{id}, #{comment}, #{articleNo})
 	</insert>
 
+	<!-- 댓글 수정 -->
 	<update id="putCommentHot">
 		UPDATE comment_hotplace
 		SET comment = #{comment}
@@ -75,11 +76,13 @@
 		commentNo = #{commentNo}
 	</update>
 
+	<!-- 댓글 삭제 -->
 	<delete id="delCommentHot">
 		DELETE
 		FROM comment_hotplace
 		WHERE commentNo =
 		#{commentNo}
 	</delete>
+
 
 </mapper>

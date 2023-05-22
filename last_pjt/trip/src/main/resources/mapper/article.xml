@@ -26,9 +26,11 @@
 		content, regTime
 		FROM board
 	</select>
-	<select id="fileBoardList" resultType="FileInfo" resultMap="file_board">
+	<select id="fileBoardList" resultType="FileInfo"
+		resultMap="file_board">
 		SELECT origin_name, online_path, delete_path
-		FROM file_info_board
+		FROM
+		file_info_board
 		WHERE
 		article_no = #{articleNo}
 	</select>
@@ -94,12 +96,15 @@
 	</resultMap>
 
 	<select id="getHotplaceList" resultMap="hotplace">
-		SELECT hotplaceNo, title, id, content, regTime
+		SELECT hotplaceNo, title,
+		id, content, regTime
 		FROM hotplace
 	</select>
-	<select id="fileHotplaceList" resultType="FileInfo" resultMap="file_hotplace">
+	<select id="fileHotplaceList" resultType="FileInfo"
+		resultMap="file_hotplace">
 		SELECT origin_name, online_path, delete_path
-		FROM file_info_hotplace
+		FROM
+		file_info_hotplace
 		WHERE
 		article_no = #{articleNo}
 	</select>
@@ -146,6 +151,52 @@
 			#{fileinfo.onlinePath}, #{fileinfo.deletePath})
 		</foreach>
 	</insert>
+
+	<!-- >>>>>>>>>>>>>>>>>> 공지사항 <<<<<<<<<<<<<<<<<< -->
+	<resultMap type="Article" id="bulletin">
+		<result column="bulletinNo" property="articleNo" />
+		<result column="title" property="title" />
+		<result column="id" property="id" />
+		<result column="content" property="content" />
+		<result column="regTime" property="regTime" />
+	</resultMap>
+
+	<select id="getBulletinList" resultMap="bulletin">
+		SELECT bulletinNo, title,
+		id,
+		content, regTime
+		FROM bulletin
+	</select>
+
+	<select id="getBulletin" resultMap="bulletin">
+		SELECT bulletinNo, title, id,
+		content, regTime
+		FROM bulletin
+		WHERE bulletinNo = #{articleNo}
+	</select>
+
+	<update id="putBulletin">
+		UPDATE bulletin
+		SET
+		title = #{title},
+		content =
+		#{content}
+		WHERE bulletinNo = #{articleNo}
+	</update>
+
+	<delete id="delBulletin">
+		DELETE
+		FROM bulletin
+		WHERE bulletinNo = #{articleNo}
+	</delete>
+
+	<insert id="postBulletin">
+		INSERT INTO bulletin (id, title, content)
+		VALUES (#{id}, #{title},
+		#{content})
+	</insert>
+
+
 
 
 </mapper>

@@ -90,5 +90,39 @@ public class ArticleController {
 		int cnt = service.postHotplace(article);
 		return cnt;
 	}
+	
+	// ------------------- 공지사항 -----------------------
+
+	@GetMapping("/bulletin")
+	public List<Article> getBulletinList() throws Exception {
+		List<Article> list = service.getBulletinList();
+		System.out.println(list);
+		return list;
+	}
+
+	@GetMapping("/bulletin/{articleNo}")
+	public Article getBulletin(@PathVariable int articleNo) throws Exception {
+		Article board = service.getBulletin(articleNo);
+		return board;
+	}
+
+	@PutMapping("/bulletin/{articleNo}")
+	int putBulletin(@RequestBody Article article) throws Exception {
+		System.out.println(article);
+		int cnt = service.putBulletin(article);
+		return cnt;
+	}
+
+	@DeleteMapping("/bulletin/{articleNo}")
+	int delBulletin(@PathVariable int articleNo) throws Exception {
+		int cnt = service.delBulletin(articleNo);
+		return cnt;
+	}
+
+	@PostMapping("/bulletin/new")
+	int postBulletin(@RequestBody Article article) throws Exception {
+		int cnt = service.postBulletin(article);
+		return cnt;
+	}
 
 }
