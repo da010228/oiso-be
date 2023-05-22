@@ -36,9 +36,7 @@ public class TripController {
 	public int postPlan(@RequestBody MyTrip plan) throws Exception {
 		return service.postPlan(plan);
 	}
-	
-	
-	
+
 	
 	@GetMapping("/{id}/{sido_code}")
 	public List<MyTripDetail> getMyTripDetailList(@PathVariable String id, @PathVariable int sido_code) throws Exception {

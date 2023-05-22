@@ -12,11 +12,11 @@ public class MyTripDetail {
 		super();
 	}
 
-	public MyTripDetail(int contentId, int contentTypeId, String id, int sido_code) {
+	public MyTripDetail(String id, int contentId, int contentTypeId, int sido_code) {
 		super();
+		this.id = id;
 		this.contentId = contentId;
 		this.contentTypeId = contentTypeId;
-		this.id = id;
 		this.sido_code = sido_code;
 	}
 
@@ -71,13 +71,14 @@ public class MyTripDetail {
 		this.id = id;
 	}
 
-	public int getSidocode() {
-		return sido_code;
+	public int getSido_code() {
+	    return sido_code;
 	}
 
-	public void setSidocode(int sido_code) {
-		this.sido_code = sido_code;
+	public void setSido_code(int sido_code) {
+	    this.sido_code = sido_code;
 	}
+
 
 	public String getDay() {
 		return day;
