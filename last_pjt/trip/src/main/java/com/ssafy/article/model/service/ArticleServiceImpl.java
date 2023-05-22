@@ -18,6 +18,8 @@ public class ArticleServiceImpl implements ArticleService {
 		this.articleMapper = articleMapper;
 	}
 
+//	-------------------- 게시판 ------------------------
+
 	@Override
 	public List<Article> getBoardList() throws Exception {
 		System.out.println(articleMapper.getBoardList());
@@ -44,77 +46,42 @@ public class ArticleServiceImpl implements ArticleService {
 	public int postBoard(Article article) throws Exception {
 		List<FileInfo> file = article.getFileInfos();
 		if (file != null && !file.isEmpty()) {
-			// 파일 처리 로직
-			// 예시: 파일을 저장하거나 처리하는 작업을 수행합니다.
-			// 이 예시에서는 파일의 이름을 출력하는 것으로 가정합니다.
-
-			// 파일 저장 등의 추가적인 작업을 수행합니다.
-			return articleMapper.postBoard(article) & articleMapper.fileRegister(article);
+			return articleMapper.postBoard(article) & articleMapper.fileRegisterBoard(article);
 		}
 		return articleMapper.postBoard(article);
-
 	}
-	
+
+//	-------------------- 핫플레이스 ------------------------
 
 	@Override
 	public List<Article> getHotplaceList() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println(articleMapper.getBoardList());
+		return articleMapper.getBoardList();
 	}
 
 	@Override
 	public Article getHotplace(int articleNo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return articleMapper.getBoard(articleNo);
 	}
 
 	@Override
 	public int putHotplace(Article article) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return articleMapper.putBoard(article);
 	}
 
 	@Override
 	public int delHotplace(int articleNo) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return articleMapper.delBoard(articleNo);
 	}
 
 	@Override
+	@Transactional
 	public int postHotplace(Article article) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		List<FileInfo> file = article.getFileInfos();
+		if (file != null && !file.isEmpty()) {
+			return articleMapper.postHotplace(article) & articleMapper.fileRegisterHotplace(article);
+		}
+		return articleMapper.postBoard(article);
 	}
-
-	@Override
-	public List<Article> getBulletinList() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Article getBulletin(int articleNo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int putBulletin(Article article) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int delBulletin(int articleNo) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int postBulletin(Article article) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 
 }
