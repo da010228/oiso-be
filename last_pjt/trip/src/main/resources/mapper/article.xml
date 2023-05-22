@@ -78,12 +78,12 @@
 
 	<!-- >>>>>>>>>>>>>>>>>> 핫플레이스 <<<<<<<<<<<<<<<<<< -->
 	<resultMap type="Article" id="hotplace">
-		<result column="articleNo" property="articleNo" />
+		<result column="hotplaceNo" property="articleNo" />
 		<result column="title" property="title" />
 		<result column="id" property="id" />
 		<result column="content" property="content" />
 		<result column="regTime" property="regTime" />
-		<collection property="fileInfos" column="articleNo"
+		<collection property="fileInfos" column="hotplaceNo"
 			javaType="list" ofType="FileInfo" select="fileHotplaceList" />
 	</resultMap>
 
@@ -94,7 +94,7 @@
 	</resultMap>
 
 	<select id="getHotplaceList" resultMap="hotplace">
-		SELECT articleNo, title, id, content, regTime
+		SELECT hotplaceNo, title, id, content, regTime
 		FROM hotplace
 	</select>
 	<select id="fileHotplaceList" resultType="FileInfo" resultMap="file_hotplace">
@@ -105,10 +105,10 @@
 	</select>
 
 	<select id="getHotplace" resultMap="hotplace">
-		SELECT articleNo, title, id,
+		SELECT hotplaceNo, title, id,
 		content, regTime
 		FROM hotplace
-		where articleNo = #{articleNo}
+		where hotplaceNo = #{articleNo}
 	</select>
 
 	<update id="putHotplace">
@@ -117,13 +117,13 @@
 		title = #{title},
 		content =
 		#{content}
-		WHERE articleNo = #{articleNo}
+		WHERE hotplaceNo = #{articleNo}
 	</update>
 
 	<delete id="delHotplace">
 		DELETE
 		FROM hotplace
-		WHERE articleNo = #{articleNo}
+		WHERE hotplaceNo = #{articleNo}
 	</delete>
 
 	<insert id="postHotplace">
