@@ -2,8 +2,6 @@ package com.ssafy.article.model.service;
 
 import java.util.List;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import com.ssafy.article.model.Article;
 
 public interface ArticleService {

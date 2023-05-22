@@ -216,17 +216,16 @@ CREATE TABLE IF NOT EXISTS `board` (
   `regTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`articleNo`))
 ENGINE = InnoDB;
-insert into `board` (title, id, content)
-values ("title", "id", "content");
+
 
 DROP TABLE IF EXISTS `hotplace`;
 CREATE TABLE IF NOT EXISTS `hotplace` (
-  `hotplaceNo` int NOT NULL AUTO_INCREMENT,
+  `articleNo` int NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(100) NOT NULL,
   `id` VARCHAR(50) NOT NULL,
   `content` TEXT NULL,
   `regTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`hotplaceNo`))
+  PRIMARY KEY (`articleNo`))
 ENGINE = InnoDB;
 
 DROP TABLE IF EXISTS `comment_board`;

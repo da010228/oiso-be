@@ -62,6 +62,7 @@ public class ArticleController {
 	@GetMapping("/hotplace")
 	public List<Article> getHotplaceList() throws Exception {
 		List<Article> list = service.getHotplaceList();
+		System.out.println(list);
 		return list;
 	}
 

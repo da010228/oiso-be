@@ -12,10 +12,10 @@
 		<result column="content" property="content" />
 		<result column="regTime" property="regTime" />
 		<collection property="fileInfos" column="articleNo"
-			javaType="list" ofType="FileInfo" select="fileInfoList" />
+			javaType="list" ofType="FileInfo" select="fileBoardList" />
 	</resultMap>
 
-	<resultMap type="FileInfo" id="file">
+	<resultMap type="FileInfo" id="file_board">
 		<result column="origin_name" property="originName" />
 		<result column="online_path" property="onlinePath" />
 		<result column="delete_path" property="deletePath" />
@@ -26,7 +26,7 @@
 		content, regTime
 		FROM board
 	</select>
-	<select id="fileInfoList" resultType="FileInfo" resultMap="file">
+	<select id="fileBoardList" resultType="FileInfo" resultMap="file_board">
 		SELECT origin_name, online_path, delete_path
 		FROM file_info_board
 		WHERE
@@ -64,7 +64,7 @@
 		</selectKey>
 	</insert>
 
-	<insert id="fileRegister" parameterType="Article">
+	<insert id="fileRegisterBoard" parameterType="Article">
 		insert into file_info_board (article_no, origin_name, online_path,
 		delete_path)
 		values
@@ -76,36 +76,35 @@
 	</insert>
 
 
-	<!-- >>>>>>>>>>>>>>>>>> 게시판 <<<<<<<<<<<<<<<<<< -->
-		<resultMap type="Article" id="hotplace">
+	<!-- >>>>>>>>>>>>>>>>>> 핫플레이스 <<<<<<<<<<<<<<<<<< -->
+	<resultMap type="Article" id="hotplace">
 		<result column="articleNo" property="articleNo" />
 		<result column="title" property="title" />
 		<result column="id" property="id" />
 		<result column="content" property="content" />
 		<result column="regTime" property="regTime" />
 		<collection property="fileInfos" column="articleNo"
-			javaType="list" ofType="FileInfo" select="fileInfoList" />
+			javaType="list" ofType="FileInfo" select="fileHotplaceList" />
 	</resultMap>
 
-	<resultMap type="FileInfo" id="file">
+	<resultMap type="FileInfo" id="file_hotplace">
 		<result column="origin_name" property="originName" />
 		<result column="online_path" property="onlinePath" />
 		<result column="delete_path" property="deletePath" />
 	</resultMap>
 
-	<select id="getBoardList" resultMap="hotplace">
-		SELECT articleNo, title, id,
-		content, regTime
+	<select id="getHotplaceList" resultMap="hotplace">
+		SELECT articleNo, title, id, content, regTime
 		FROM hotplace
 	</select>
-	<select id="fileInfoList" resultType="FileInfo" resultMap="file">
+	<select id="fileHotplaceList" resultType="FileInfo" resultMap="file_hotplace">
 		SELECT origin_name, online_path, delete_path
 		FROM file_info_hotplace
 		WHERE
 		article_no = #{articleNo}
 	</select>
 
-	<select id="getBoard" resultMap="hotplace">
+	<select id="getHotplace" resultMap="hotplace">
 		SELECT articleNo, title, id,
 		content, regTime
 		FROM hotplace
@@ -116,7 +115,8 @@
 		UPDATE hotplace
 		SET
 		title = #{title},
-		content = #{content}
+		content =
+		#{content}
 		WHERE articleNo = #{articleNo}
 	</update>
 
@@ -136,7 +136,7 @@
 		</selectKey>
 	</insert>
 
-	<insert id="fileRegister" parameterType="Article">
+	<insert id="fileRegisterHotplace" parameterType="Article">
 		insert into file_info_hotplace (article_no, origin_name, online_path,
 		delete_path)
 		values
