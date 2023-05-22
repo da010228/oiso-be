@@ -55,23 +55,23 @@ public class ArticleServiceImpl implements ArticleService {
 
 	@Override
 	public List<Article> getHotplaceList() throws Exception {
-		System.out.println(articleMapper.getBoardList());
-		return articleMapper.getBoardList();
+		System.out.println(articleMapper.getHotplaceList());
+		return articleMapper.getHotplaceList();
 	}
 
 	@Override
 	public Article getHotplace(int articleNo) throws Exception {
-		return articleMapper.getBoard(articleNo);
+		return articleMapper.getHotplace(articleNo);
 	}
 
 	@Override
 	public int putHotplace(Article article) throws Exception {
-		return articleMapper.putBoard(article);
+		return articleMapper.putHotplace(article);
 	}
 
 	@Override
 	public int delHotplace(int articleNo) throws Exception {
-		return articleMapper.delBoard(articleNo);
+		return articleMapper.delHotplace(articleNo);
 	}
 
 	@Override
@@ -81,7 +81,7 @@ public class ArticleServiceImpl implements ArticleService {
 		if (file != null && !file.isEmpty()) {
 			return articleMapper.postHotplace(article) & articleMapper.fileRegisterHotplace(article);
 		}
-		return articleMapper.postBoard(article);
+		return articleMapper.postHotplace(article);
 	}
 
 }
