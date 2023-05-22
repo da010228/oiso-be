@@ -22,8 +22,16 @@ drop database  if exists enjoytrips;
 create database enjoytrips;
 use enjoytrips;
 
-DROP TABLE IF EXISTS `file_info`;
-CREATE TABLE `file_info` (
+DROP TABLE IF EXISTS `file_info_board`;
+CREATE TABLE `file_info_board` (
+  `article_no` int NOT NULL,
+  `origin_name` varchar(100) DEFAULT NULL,
+  `online_path` varchar(100) DEFAULT NULL,
+  `delete_path` varchar(100) DEFAULT NULL
+  );
+  
+  DROP TABLE IF EXISTS `file_info_hotplace`;
+CREATE TABLE `file_info_hotplace` (
   `article_no` int NOT NULL,
   `origin_name` varchar(100) DEFAULT NULL,
   `online_path` varchar(100) DEFAULT NULL,

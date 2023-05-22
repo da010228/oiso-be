@@ -7,6 +7,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ssafy.article.model.Article;
 
 public interface ArticleService {
+	
+//	-------------------- 게시판 ------------------------
 	List<Article> getBoardList() throws Exception;
 	
 	Article getBoard(int articleNo) throws Exception;
@@ -16,6 +18,8 @@ public interface ArticleService {
 	int delBoard(int articleNo) throws Exception;
 
 	int postBoard(Article article) throws Exception;
+	
+//	-------------------- 핫플레이스 ------------------------
 
 	List<Article> getHotplaceList() throws Exception;
 
@@ -27,14 +31,5 @@ public interface ArticleService {
 
 	int postHotplace(Article article) throws Exception;
 
-	List<Article> getBulletinList() throws Exception;
-
-	Article getBulletin(int articleNo) throws Exception;
-
-	int putBulletin(Article article) throws Exception;
-
-	int delBulletin(int articleNo) throws Exception;
-
-	int postBulletin(Article article) throws Exception;
 
 }

@@ -4,66 +4,148 @@
 
 <mapper namespace="com.ssafy.article.model.mapper.ArticleMapper">
 
+	<!-- >>>>>>>>>>>>>>>>>> 게시판 <<<<<<<<<<<<<<<<<< -->
 	<resultMap type="Article" id="board">
-		<result column="articleNo" property="articleNo"/>
-		<result column="title" property="title"/>
-		<result column="id" property="id"/>
-		<result column="content" property="content"/>
-		<result column="regTime" property="regTime"/>
-  		<collection property="fileInfos" column="articleNo" javaType="list" ofType="FileInfo" select="fileInfoList"/>
+		<result column="articleNo" property="articleNo" />
+		<result column="title" property="title" />
+		<result column="id" property="id" />
+		<result column="content" property="content" />
+		<result column="regTime" property="regTime" />
+		<collection property="fileInfos" column="articleNo"
+			javaType="list" ofType="FileInfo" select="fileInfoList" />
 	</resultMap>
-	
+
 	<resultMap type="FileInfo" id="file">
-		<result column="origin_name" property="originName"/>
-		<result column="online_path" property="onlinePath"/>
-		<result column="delete_path" property="deletePath"/>
+		<result column="origin_name" property="originName" />
+		<result column="online_path" property="onlinePath" />
+		<result column="delete_path" property="deletePath" />
 	</resultMap>
 
 	<select id="getBoardList" resultMap="board">
-		SELECT articleNo, title, id, content, regTime
+		SELECT articleNo, title, id,
+		content, regTime
 		FROM board
 	</select>
- 	<select id="fileInfoList" resultType="FileInfo" resultMap="file">
+	<select id="fileInfoList" resultType="FileInfo" resultMap="file">
 		SELECT origin_name, online_path, delete_path
-		FROM file_info
-		WHERE article_no = #{articleNo}
+		FROM file_info_board
+		WHERE
+		article_no = #{articleNo}
 	</select>
-	
+
 	<select id="getBoard" resultMap="board">
-		SELECT articleNo, title, id, content, regTime
+		SELECT articleNo, title, id,
+		content, regTime
 		FROM board
 		where articleNo = #{articleNo}
 	</select>
-	
+
 	<update id="putBoard">
 		UPDATE board
 		SET
-			title = #{title},
-			content = #{content}
+		title = #{title},
+		content = #{content}
 		WHERE articleNo = #{articleNo}
 	</update>
-	
+
 	<delete id="delBoard">
 		DELETE
 		FROM board
 		WHERE articleNo = #{articleNo}
 	</delete>
-	
+
 	<insert id="postBoard">
 		insert into board (id, title, content)
-		values (#{id}, #{title}, #{content})
-		<selectKey resultType="int" keyProperty="articleNo" order="AFTER">
-		SELECT LAST_INSERT_ID()
+		values (#{id}, #{title},
+		#{content})
+		<selectKey resultType="int" keyProperty="articleNo"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
 		</selectKey>
 	</insert>
-	
+
 	<insert id="fileRegister" parameterType="Article">
-		insert into file_info (article_no, origin_name, online_path, delete_path)
+		insert into file_info_board (article_no, origin_name, online_path,
+		delete_path)
 		values
-		<foreach collection="fileInfos" item="fileinfo" separator=" , ">
-			(#{articleNo}, #{fileinfo.originName}, #{fileinfo.onlinePath}, #{fileinfo.deletePath})
+		<foreach collection="fileInfos" item="fileinfo"
+			separator=" , ">
+			(#{articleNo}, #{fileinfo.originName},
+			#{fileinfo.onlinePath}, #{fileinfo.deletePath})
 		</foreach>
 	</insert>
-	
-	
+
+
+	<!-- >>>>>>>>>>>>>>>>>> 게시판 <<<<<<<<<<<<<<<<<< -->
+		<resultMap type="Article" id="hotplace">
+		<result column="articleNo" property="articleNo" />
+		<result column="title" property="title" />
+		<result column="id" property="id" />
+		<result column="content" property="content" />
+		<result column="regTime" property="regTime" />
+		<collection property="fileInfos" column="articleNo"
+			javaType="list" ofType="FileInfo" select="fileInfoList" />
+	</resultMap>
+
+	<resultMap type="FileInfo" id="file">
+		<result column="origin_name" property="originName" />
+		<result column="online_path" property="onlinePath" />
+		<result column="delete_path" property="deletePath" />
+	</resultMap>
+
+	<select id="getBoardList" resultMap="hotplace">
+		SELECT articleNo, title, id,
+		content, regTime
+		FROM hotplace
+	</select>
+	<select id="fileInfoList" resultType="FileInfo" resultMap="file">
+		SELECT origin_name, online_path, delete_path
+		FROM file_info_hotplace
+		WHERE
+		article_no = #{articleNo}
+	</select>
+
+	<select id="getBoard" resultMap="hotplace">
+		SELECT articleNo, title, id,
+		content, regTime
+		FROM hotplace
+		where articleNo = #{articleNo}
+	</select>
+
+	<update id="putHotplace">
+		UPDATE hotplace
+		SET
+		title = #{title},
+		content = #{content}
+		WHERE articleNo = #{articleNo}
+	</update>
+
+	<delete id="delHotplace">
+		DELETE
+		FROM hotplace
+		WHERE articleNo = #{articleNo}
+	</delete>
+
+	<insert id="postHotplace">
+		insert into hotplace (id, title, content)
+		values (#{id}, #{title},
+		#{content})
+		<selectKey resultType="int" keyProperty="articleNo"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<insert id="fileRegister" parameterType="Article">
+		insert into file_info_hotplace (article_no, origin_name, online_path,
+		delete_path)
+		values
+		<foreach collection="fileInfos" item="fileinfo"
+			separator=" , ">
+			(#{articleNo}, #{fileinfo.originName},
+			#{fileinfo.onlinePath}, #{fileinfo.deletePath})
+		</foreach>
+	</insert>
+
+
 </mapper>
