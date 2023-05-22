@@ -4,14 +4,6 @@
 
 <mapper namespace="com.ssafy.trip.model.mapper.TripMapper">
 
-	<resultMap type="MyTripDetail" id="tripdetail">
-		<result column="detailNo" property="detailNo"/>
-		<result column="contentId" property="contentId"/>
-		<result column="contentTypeId" property="contentTypeId"/>
-		<result column="mytripNo" property="mytripNo"/>
-		<result column="day" property="day"/>
-	</resultMap>
-	
 	<resultMap type="MyTrip" id="trip">
 		<result column="mytripNo" property="mytripNo"/>
 		<result column="id" property="id"/>
@@ -21,6 +13,16 @@
 		<result column="startPeriod" property="startPeriod"/>
 		<result column="endPeriod" property="endPeriod"/>
 	</resultMap>
+	
+	<resultMap type="MyTripDetail" id="tripdetail">
+		<result column="detailNo" property="detailNo"/>
+		<result column="contentId" property="contentId"/>
+		<result column="contentTypeId" property="contentTypeId"/>
+		<result column="id" property="id"/>
+		<result column="sido_code" property="sido_code"/>
+		<result column="day" property="day"/>
+	</resultMap>
+	
 
 	<select id="getMyTripList" resultMap="trip">
 		SELECT mytripNo, id, sido_code, title, regTime, startPeriod, endPeriod
@@ -28,12 +30,26 @@
 		WHERE id = #{id}
 	</select>
 	
+	<insert id="postPlan">
+		insert into mytrip (id, sido_code, title, startPeriod, endPeriod)
+		values (#{id}, #{sido_code}, #{title}, #{startPeriod}, #{endPeriod})
+	</insert>
+	
+	
+	
+	
+	
 	
 	<select id="getMyTripDetailList" resultMap="tripdetail">
-		SELECT detailNo, contentId, contentTypeId, mytripNo, day
+		SELECT detailNo, contentId, contentTypeId, sido_code, day
 		FROM mytrip_list
-		where mytripNo = #{mytripNo}
+		where sido_code = #{sido_code} and id = #{id}
 	</select>
+	
+	<insert id="postDetail">
+		insert into mytrip_list (contentId, contentTypeId, id, sido_code)
+		values (#{contentId}, #{contentTypeId}, #{id}, #{sido_code})
+	</insert>
 	
 	
 </mapper>
