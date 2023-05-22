@@ -220,12 +220,12 @@ ENGINE = InnoDB;
 
 DROP TABLE IF EXISTS `hotplace`;
 CREATE TABLE IF NOT EXISTS `hotplace` (
-  `articleNo` int NOT NULL AUTO_INCREMENT,
+  `hotplaceNo` int NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(100) NOT NULL,
   `id` VARCHAR(50) NOT NULL,
   `content` TEXT NULL,
   `regTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`articleNo`))
+  PRIMARY KEY (`hotplaceNo`))
 ENGINE = InnoDB;
 
 DROP TABLE IF EXISTS `comment_board`;
@@ -255,6 +255,7 @@ CREATE TABLE `comment_hotplace` (
 select * from hotplace;
 insert into hotplace values(1, "왜 없어", "ssafy", "내용도 추가", now());
 
+-- 계획을 만들면 목록으로 저것들을 (아이디랑 , 시도 코드로?) 불러온다 여도 되긴 함
 CREATE TABLE IF NOT EXISTS `mytrip` (
   `mytripNo` int NOT NULL AUTO_INCREMENT,
   `id` VARCHAR(50) NOT NULL,
@@ -267,16 +268,17 @@ CREATE TABLE IF NOT EXISTS `mytrip` (
 ENGINE = InnoDB;
 
 insert into mytrip (id, sido_code, title, startPeriod, endPeriod)
-values("ssafy", 12, "나와줄래", 20230520, 20230526);
+values("ssafy", 6, "나와줄래", 20230520, 20230526);
 
+
+drop table if exists mytrip_list;
+-- 찜 미리 그냥 저장해두는 용도로 쓰고
 CREATE TABLE IF NOT EXISTS `mytrip_list` (
 `detailNo` int NOT NULL AUTO_INCREMENT,
 `contentId` int NOT NULL,
 `contentTypeId` int NOT NULL,
 `id` VARCHAR(50) NOT NULL,
-`mytripNo` int NOT NULL,
-`day` varchar(3) NOT NULL,
- PRIMARY KEY (`detailNo`),
- KEY `comment_mytrip_idx` (`mytripNo`),
- CONSTRAINT `comment_mytrip_detailNo` FOREIGN KEY (`mytripNo`) REFERENCES `mytrip` (`mytripNo`)
+`sido_code` int NOT NULL,
+`day` varchar(3) DEFAULT 0,
+ PRIMARY KEY (`detailNo`)
 ) ENGINE=InnoDB;
