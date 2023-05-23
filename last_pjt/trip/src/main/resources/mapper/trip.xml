@@ -21,6 +21,7 @@
 		<result column="id" property="id"/>
 		<result column="sido_code" property="sido_code"/>
 		<result column="day" property="day"/>
+		<result column="sequence" property="sequence"/>
 	</resultMap>
 	
 
@@ -31,25 +32,43 @@
 	</select>
 	
 	<insert id="postPlan">
-		insert into mytrip (id, sido_code, title, startPeriod, endPeriod)
-		values (#{id}, #{sido_code}, #{title}, #{startPeriod}, #{endPeriod})
+		INSERT INTO mytrip (id, sido_code, title, startPeriod, endPeriod)
+		VALUES (#{id}, #{sido_code}, #{title}, #{startPeriod}, #{endPeriod})
 	</insert>
 	
-	
+	<delete id="delPlan">
+		DELETE
+		FROM mytrip
+		WHERE mytripNo = #{mytripNo}
+	</delete>
 	
 	
 	
 	
 	<select id="getMyTripDetailList" resultMap="tripdetail">
-		SELECT detailNo, contentId, contentTypeId, sido_code, day
+		SELECT detailNo, contentId, contentTypeId, sido_code, day, sequence
 		FROM mytrip_list
-		where sido_code = #{sido_code} and id = #{id}
+		WHERE sido_code = #{sido_code} AND id = #{id}
+		ORDER BY day, sequence
 	</select>
 	
 	<insert id="postDetail">
-		insert into mytrip_list (contentId, contentTypeId, id, sido_code)
-		values (#{contentId}, #{contentTypeId}, #{id}, #{sido_code})
+		INSERT INTO mytrip_list (contentId, contentTypeId, id, sido_code)
+		VALUES (#{contentId}, #{contentTypeId}, #{id}, #{sido_code})
 	</insert>
 	
+	<delete id="delDetail">
+		DELETE
+		FROM mytrip_list
+		WHERE id = #{id} AND contentId = #{contentId}
+	</delete>
+	
+	<update id="putDetail">
+		UPDATE bulletin
+		SET
+		day = #{day},
+		sequence = #{sequence}
+		WHERE id = #{id} AND sido_code = #{sido_code}
+	</update>
 	
 </mapper>

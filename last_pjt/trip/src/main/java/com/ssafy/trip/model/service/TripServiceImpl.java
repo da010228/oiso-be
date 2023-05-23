@@ -23,6 +23,10 @@ public class TripServiceImpl implements TripService {
 	public int postPlan(MyTrip plan) throws Exception {
 		return tripMapper.postPlan(plan);
 	}
+	@Override
+	public int delPlan(int mytripNo) throws Exception {
+		return tripMapper.delPlan(mytripNo);
+	}
 	
 	
 	
@@ -33,6 +37,14 @@ public class TripServiceImpl implements TripService {
 	@Override
 	public int postDetail(MyTripDetail detail) throws Exception {
 		return tripMapper.postDetail(detail);
+	}
+	@Override
+	public int delDetail(String id, int contentId) throws Exception {
+		return tripMapper.delDetail(id, contentId);
+	}
+	@Override
+	public int putDetail(List<MyTripDetail> detail, String id, int sido_code) throws Exception {
+		return tripMapper.putDetail(detail, id, sido_code);
 	}
 
 }
