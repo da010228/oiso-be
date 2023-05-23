@@ -11,6 +11,8 @@
 		<result column="id" property="id" />
 		<result column="content" property="content" />
 		<result column="regTime" property="regTime" />
+		<result column="viewCnt" property="viewCnt" />
+		<result column="likeCnt" property="likeCnt" />
 		<collection property="fileInfos" column="articleNo"
 			javaType="list" ofType="FileInfo" select="fileBoardList" />
 	</resultMap>
@@ -23,7 +25,7 @@
 
 	<select id="getBoardList" resultMap="board">
 		SELECT articleNo, title, id,
-		content, regTime
+		content, regTime, viewCnt, likeCnt
 		FROM board
 	</select>
 	<select id="fileBoardList" resultType="FileInfo"
@@ -37,7 +39,7 @@
 
 	<select id="getBoard" resultMap="board">
 		SELECT articleNo, title, id,
-		content, regTime
+		content, regTime, viewCnt, likeCnt
 		FROM board
 		where articleNo = #{articleNo}
 	</select>
@@ -46,7 +48,9 @@
 		UPDATE board
 		SET
 		title = #{title},
-		content = #{content}
+		content = #{content},
+		viewCnt = #{viewCnt},
+		likeCnt = #{likeCnt}
 		WHERE articleNo = #{articleNo}
 	</update>
 
@@ -57,9 +61,9 @@
 	</delete>
 
 	<insert id="postBoard">
-		insert into board (id, title, content)
+		insert into board (id, title, content, viewCnt, likeCnt)
 		values (#{id}, #{title},
-		#{content})
+		#{content}, 0, 0)
 		<selectKey resultType="int" keyProperty="articleNo"
 			order="AFTER">
 			SELECT LAST_INSERT_ID()
@@ -97,8 +101,9 @@
 
 	<select id="getHotplaceList" resultMap="hotplace">
 		SELECT hotplaceNo, title,
-		id, content, regTime
+		id, content, regTime, viewCnt, likeCnt
 		FROM hotplace
+		ORDER BY likeCnt DESC
 	</select>
 	<select id="fileHotplaceList" resultType="FileInfo"
 		resultMap="file_hotplace">
@@ -111,7 +116,7 @@
 
 	<select id="getHotplace" resultMap="hotplace">
 		SELECT hotplaceNo, title, id,
-		content, regTime
+		content, regTime, viewCnt, likeCnt
 		FROM hotplace
 		where hotplaceNo = #{articleNo}
 	</select>
@@ -121,7 +126,9 @@
 		SET
 		title = #{title},
 		content =
-		#{content}
+		#{content},
+		viewCnt = #{viewCnt},
+		likeCnt = #{likeCnt}
 		WHERE hotplaceNo = #{articleNo}
 	</update>
 
@@ -132,9 +139,9 @@
 	</delete>
 
 	<insert id="postHotplace">
-		insert into hotplace (id, title, content)
+		insert into hotplace (id, title, content, viewCnt, likeCnt)
 		values (#{id}, #{title},
-		#{content})
+		#{content}, 0, 0)
 		<selectKey resultType="int" keyProperty="articleNo"
 			order="AFTER">
 			SELECT LAST_INSERT_ID()
@@ -164,13 +171,13 @@
 	<select id="getBulletinList" resultMap="bulletin">
 		SELECT bulletinNo, title,
 		id,
-		content, regTime
+		content, regTime, viewCnt, likeCnt
 		FROM bulletin
 	</select>
 
 	<select id="getBulletin" resultMap="bulletin">
 		SELECT bulletinNo, title, id,
-		content, regTime
+		content, regTime, viewCnt, likeCnt
 		FROM bulletin
 		WHERE bulletinNo = #{articleNo}
 	</select>
@@ -180,7 +187,9 @@
 		SET
 		title = #{title},
 		content =
-		#{content}
+		#{content},
+		viewCnt = #{viewCnt},
+		likeCnt = #{likeCnt}
 		WHERE bulletinNo = #{articleNo}
 	</update>
 
@@ -191,9 +200,9 @@
 	</delete>
 
 	<insert id="postBulletin">
-		INSERT INTO bulletin (id, title, content)
+		INSERT INTO bulletin (id, title, content, viewCnt, likeCnt)
 		VALUES (#{id}, #{title},
-		#{content})
+		#{content}, 0, 0)
 	</insert>
 
 

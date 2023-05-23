@@ -214,6 +214,8 @@ CREATE TABLE IF NOT EXISTS `board` (
   `id` VARCHAR(50) NOT NULL,
   `content` TEXT NULL,
   `regTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `viewCnt` int,
+  `likeCnt` int,
   PRIMARY KEY (`articleNo`))
 ENGINE = InnoDB;
 
@@ -225,6 +227,8 @@ CREATE TABLE IF NOT EXISTS `hotplace` (
   `id` VARCHAR(50) NOT NULL,
   `content` TEXT NULL,
   `regTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `viewCnt` int,
+  `likeCnt` int,
   PRIMARY KEY (`hotplaceNo`))
 ENGINE = InnoDB;
 
@@ -235,6 +239,8 @@ CREATE TABLE IF NOT EXISTS `bulletin` (
   `id` VARCHAR(50) NOT NULL,
   `content` TEXT NULL,
   `regTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `viewCnt` int,
+  `likeCnt` int,
   PRIMARY KEY (`bulletinNo`))
 ENGINE = InnoDB;
 
@@ -262,8 +268,6 @@ CREATE TABLE `comment_hotplace` (
   CONSTRAINT `comment_hotplace_articleNo` FOREIGN KEY (`hotplaceNo`) REFERENCES `hotplace` (`hotplaceNo`)
 ) ENGINE=InnoDB;
 
-select * from hotplace;
-insert into hotplace values(1, "왜 없어", "ssafy", "내용도 추가", now());
 
 -- 계획을 만들면 목록으로 저것들을 (아이디랑 , 시도 코드로?) 불러온다 여도 되긴 함
 CREATE TABLE IF NOT EXISTS `mytrip` (
