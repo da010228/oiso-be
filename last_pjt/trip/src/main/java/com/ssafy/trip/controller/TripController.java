@@ -27,52 +27,51 @@ public class TripController {
 		this.service = service;
 	}
 
-	//여행 계획 (큰 틀)
+	// 여행 계획 (큰 틀)
 	@GetMapping("/{id}")
 	public List<MyTrip> getMyTripList(@PathVariable String id) throws Exception {
 		List<MyTrip> list = service.getMyTripList(id);
 		return list;
 	}
-	
+
 	@PostMapping("/plan/{id}")
 	public int postPlan(@RequestBody MyTrip plan) throws Exception {
 		return service.postPlan(plan);
 	}
-	
+
 	@DeleteMapping("/plan/{mytripNo}")
 	int delPlan(@PathVariable int mytripNo) throws Exception {
 		System.out.println(mytripNo);
 		int cnt = service.delPlan(mytripNo);
 		return cnt;
 	}
-	
-	
-	
-	//여행 상세 정보
 
-	
+	// 여행 상세 정보
 	@GetMapping("/{id}/{sido_code}")
-	public List<MyTripDetail> getMyTripDetailList(@PathVariable String id, @PathVariable int sido_code) throws Exception {
-		System.out.println(id+" "+ sido_code);
+	public List<MyTripDetail> getMyTripDetailList(@PathVariable String id, @PathVariable int sido_code)
+			throws Exception {
+		System.out.println(id + " " + sido_code);
 		List<MyTripDetail> list = service.getMyTripDetailList(id, sido_code);
 		System.out.println(list);
 		return list;
 	}
-	
-	//하나 추가
+
+	// 하나 추가
 	@PostMapping("/{id}")
 	public int postDetail(@RequestBody MyTripDetail detail) throws Exception {
 		System.out.println(detail);
 		return service.postDetail(detail);
 	}
-	
-	//데이터 전체 추가
-	@PutMapping("/{id}/{sido_code}")
-	public int putDetail(@RequestBody List<MyTripDetail> detail, @PathVariable String id, @PathVariable int sido_code) throws Exception {
-		System.out.println(detail);
-		return service.putDetail(detail, id, sido_code);
+
+	// 데이터 수정
+	@PutMapping("/{detailNo}/{sequence}")
+	public int putDetail(/* @RequestBody List<MyTripDetail> MyTripDetail detail, */ 
+			@PathVariable int detailNo,
+			@PathVariable int sequence) throws Exception {
+		System.out.println(detailNo+" "+sequence);
+		return service.putDetail(detailNo, sequence);
 	}
-	
+
 	@DeleteMapping("/{id}/{contentId}")
 	int delDetail(@PathVariable String id, @PathVariable int contentId) throws Exception {
 		int cnt = service.delDetail(id, contentId);

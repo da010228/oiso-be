@@ -12,6 +12,24 @@ public class MyTripDetail {
 	public MyTripDetail() {
 		super();
 	}
+	
+	
+	
+	public MyTripDetail(int contentId, int sido_code, String sequence) {
+		super();
+		this.contentId = contentId;
+		this.sido_code = sido_code;
+		this.sequence = sequence;
+	}
+
+
+
+	public MyTripDetail(int contentId, String id, int sido_code) {
+		super();
+		this.contentId = contentId;
+		this.id = id;
+		this.sido_code = sido_code;
+	}
 
 	public MyTripDetail(String id, int contentId, int contentTypeId, int sido_code) {
 		super();
