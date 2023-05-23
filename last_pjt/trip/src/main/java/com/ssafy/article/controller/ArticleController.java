@@ -31,6 +31,7 @@ public class ArticleController {
 	@GetMapping("/board")
 	public List<Article> getBoardList() throws Exception {
 		List<Article> list = service.getBoardList();
+		System.out.println(list);
 		return list;
 	}
 
@@ -42,6 +43,7 @@ public class ArticleController {
 
 	@PutMapping("/board/{articleNo}")
 	int putBoard(@RequestBody Article article) throws Exception {
+		System.out.println(article);
 		int cnt = service.putBoard(article);
 		return cnt;
 	}
@@ -62,7 +64,6 @@ public class ArticleController {
 	@GetMapping("/hotplace")
 	public List<Article> getHotplaceList() throws Exception {
 		List<Article> list = service.getHotplaceList();
-		System.out.println(list);
 		return list;
 	}
 
