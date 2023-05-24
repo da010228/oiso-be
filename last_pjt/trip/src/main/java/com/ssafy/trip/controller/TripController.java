@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafy.article.model.Article;
 import com.ssafy.trip.model.MyTrip;
 import com.ssafy.trip.model.MyTripDetail;
 import com.ssafy.trip.model.service.TripService;
