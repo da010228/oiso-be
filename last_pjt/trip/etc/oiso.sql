@@ -215,10 +215,17 @@ CREATE TABLE IF NOT EXISTS `board` (
   `content` TEXT NULL,
   `regTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `viewCnt` int,
-  `likeCnt` int,
   PRIMARY KEY (`articleNo`))
 ENGINE = InnoDB;
 
+DROP TABLE IF EXISTS `board_like_count`;
+CREATE TABLE IF NOT EXISTS `board_like_count` (
+  `id` varchar(20) NOT NULL,
+  `articleNo` int NOT NULL,
+  PRIMARY KEY (`id`, `articleNo`),
+  FOREIGN KEY (`id`) REFERENCES `user`(`id`),
+  FOREIGN KEY (`articleNo`) REFERENCES `board`(`articleNo`)
+) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS `hotplace`;
 CREATE TABLE IF NOT EXISTS `hotplace` (
@@ -228,9 +235,18 @@ CREATE TABLE IF NOT EXISTS `hotplace` (
   `content` TEXT NULL,
   `regTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `viewCnt` int,
-  `likeCnt` int,
   PRIMARY KEY (`hotplaceNo`))
 ENGINE = InnoDB;
+
+DROP TABLE IF EXISTS `hotplace_like_count`;
+CREATE TABLE IF NOT EXISTS `hotplace_like_count` (
+  `id` varchar(20) NOT NULL,
+  `hotplaceNo` int NOT NULL,
+  PRIMARY KEY (`id`, `hotplaceNo`),
+  FOREIGN KEY (`id`) REFERENCES `user`(`id`),
+  FOREIGN KEY (`hotplaceNo`) REFERENCES `hotplace`(`hotplaceNo`)
+) ENGINE=InnoDB;
+
 
 DROP TABLE IF EXISTS `bulletin`;
 CREATE TABLE IF NOT EXISTS `bulletin` (
@@ -240,9 +256,17 @@ CREATE TABLE IF NOT EXISTS `bulletin` (
   `content` TEXT NULL,
   `regTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `viewCnt` int,
-  `likeCnt` int,
   PRIMARY KEY (`bulletinNo`))
 ENGINE = InnoDB;
+
+DROP TABLE IF EXISTS `bulletin_like_count`;
+CREATE TABLE IF NOT EXISTS `bulletin_like_count` (
+  `id` varchar(20) NOT NULL,
+  `bulletinNo` int NOT NULL,
+  PRIMARY KEY (`id`, `bulletinNo`),
+  FOREIGN KEY (`id`) REFERENCES `user`(`id`),
+  FOREIGN KEY (`bulletinNo`) REFERENCES `bulletin`(`bulletinNo`)
+) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS `comment_board`;
 CREATE TABLE `comment_board` (

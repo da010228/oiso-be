@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.ssafy.article.model.mapper.LikeCountMapper">
+
+	<select id="checkIfLiked" resultType="int">
+		SELECT COUNT(*)
+		FROM
+		board_like_count
+		WHERE id = #{id} AND articleNo = #{articleNo}
+	</select>
+
+	<insert id="addLike" parameterType="LikeRequest">
+		INSERT INTO board_like_count
+		(id, articleNo) VALUES (#{id},
+		#{articleNo})
+	</insert>
+
+	<delete id="removeLike" parameterType="LikeRequest">
+		DELETE FROM
+		board_like_count WHERE id = #{id} AND articleNo =
+		#{articleNo}
+	</delete>
+
+</mapper>
