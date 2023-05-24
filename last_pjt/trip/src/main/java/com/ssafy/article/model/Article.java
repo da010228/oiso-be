@@ -13,13 +13,10 @@ public class Article {
 	private int viewCnt;
 	private int likeCnt;
 
-	public Article() {
-		super();
-	}
+	public Article() {}
 
 	public Article(int articleNo, String title, String id, String content, String regTime, List<FileInfo> fileInfos,
 			int viewCnt, int likeCnt) {
-		super();
 		this.articleNo = articleNo;
 		this.title = title;
 		this.id = id;
@@ -30,28 +27,26 @@ public class Article {
 		this.likeCnt = likeCnt;
 	}
 
-	public Article(String title, String content) {
-		super();
-		this.title = title;
-		this.content = content;
-	}
+//	public Article(String title, String content) {
+//		super();
+//		this.title = title;
+//		this.content = content;
+//	}
 
-	public Article(String title, String id, String content, int viewCnt, int likeCnt) {
+	public Article(String title, String id, String content, int viewCnt) {
 		super();
 		this.title = title;
 		this.id = id;
 		this.content = content;
 		this.viewCnt = viewCnt;
-		this.likeCnt = likeCnt;
 	}
 
-	public Article(String title, String id, String content, List<FileInfo> fileInfos, int viewCnt, int likeCnt) {
+	public Article(String title, String id, String content, List<FileInfo> fileInfos, int viewCnt) {
 		this.title = title;
 		this.id = id;
 		this.content = content;
 		this.fileInfos = fileInfos;
 		this.viewCnt = viewCnt;
-		this.likeCnt = likeCnt;
 	}
 
 	public int getArticleNo() {

@@ -2,6 +2,8 @@ package com.ssafy.article.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,21 +14,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.article.model.Article;
+import com.ssafy.article.model.LikeRequest;
 import com.ssafy.article.model.service.ArticleService;
+import com.ssafy.article.model.service.LikeCountService;
 
 @RestController
 @RequestMapping("/article")
 public class ArticleController {
 
-
 	private ArticleService service;
 
 	public ArticleController(ArticleService service) {
-		super();
 		this.service = service;
 	}
 
-	
 	// ------------------- 게시판 -----------------------
 	@GetMapping("/board")
 	public List<Article> getBoardList() throws Exception {
@@ -58,7 +59,7 @@ public class ArticleController {
 	int postBoard(@RequestBody Article article) throws Exception {
 		return service.postBoard(article);
 	}
-	
+
 	// ------------------- 핫플레이스 -----------------------
 
 	@GetMapping("/hotplace")
@@ -91,7 +92,7 @@ public class ArticleController {
 		int cnt = service.postHotplace(article);
 		return cnt;
 	}
-	
+
 	// ------------------- 공지사항 -----------------------
 
 	@GetMapping("/bulletin")
