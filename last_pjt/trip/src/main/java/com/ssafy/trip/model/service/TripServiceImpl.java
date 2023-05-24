@@ -24,6 +24,10 @@ public class TripServiceImpl implements TripService {
 		return tripMapper.postPlan(plan);
 	}
 	@Override
+	public int putPlan(MyTrip plan) throws Exception {
+		return tripMapper.putPlan(plan);
+	}
+	@Override
 	public int delPlan(int mytripNo) throws Exception {
 		return tripMapper.delPlan(mytripNo);
 	}

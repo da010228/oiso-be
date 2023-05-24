@@ -13,6 +13,7 @@ import com.ssafy.user.model.User;
 public interface TripMapper {
 	List<MyTrip> getMyTripList(String id) throws Exception;
 	int postPlan(MyTrip plan) throws Exception;	
+	int putPlan(MyTrip plan) throws Exception;
 	int delPlan(int mytripNo) throws Exception;	
 	
 	
