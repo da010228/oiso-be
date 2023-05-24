@@ -6,7 +6,6 @@ public class MyTripDetail {
 	private int contentTypeId;
 	private String id;
 	private int sido_code;
-	private String day;
 	private String sequence;
 	
 	public MyTripDetail() {
@@ -39,23 +38,21 @@ public class MyTripDetail {
 		this.sido_code = sido_code;
 	}
 
-	public MyTripDetail(int detailNo, int contentId, int contentTypeId, int sido_code, String day) {
+	public MyTripDetail(int detailNo, int contentId, int contentTypeId, int sido_code) {
 		super();
 		this.detailNo = detailNo;
 		this.contentId = contentId;
 		this.contentTypeId = contentTypeId;
 		this.sido_code = sido_code;
-		this.day = day;
 	}
 
-	public MyTripDetail(int detailNo, int contentId, int contentTypeId, String id, int sido_code, String day, String sequence) {
+	public MyTripDetail(int detailNo, int contentId, int contentTypeId, String id, int sido_code, String sequence) {
 		super();
 		this.detailNo = detailNo;
 		this.contentId = contentId;
 		this.contentTypeId = contentTypeId;
 		this.id = id;
 		this.sido_code = sido_code;
-		this.day = day;
 		this.sequence = sequence;
 	}
 
@@ -99,15 +96,6 @@ public class MyTripDetail {
 	    this.sido_code = sido_code;
 	}
 
-
-	public String getDay() {
-		return day;
-	}
-
-	public void setDay(String day) {
-		this.day = day;
-	}
-
 	public String getSequence() {
 		return sequence;
 	}
@@ -119,7 +107,7 @@ public class MyTripDetail {
 	@Override
 	public String toString() {
 		return "MyTripDetail [detailNo=" + detailNo + ", contentId=" + contentId + ", contentTypeId=" + contentTypeId
-				+ ", id=" + id + ", sido_code=" + sido_code + ", day=" + day + ", sequence=" + sequence + "]";
+				+ ", id=" + id + ", sido_code=" + sido_code + ", sequence=" + sequence + "]";
 	}
 
 	

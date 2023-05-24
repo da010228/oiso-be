@@ -42,18 +42,9 @@ public class TripServiceImpl implements TripService {
 	public int delDetail(String id, int contentId) throws Exception {
 		return tripMapper.delDetail(id, contentId);
 	}
-//	@Override
-//	public int putDetail(List<MyTripDetail> detail, String id, int sido_code) throws Exception {
-//		return tripMapper.putDetail(detail, id, sido_code);
-//	}
-//	@Override
-//	public int putDetail(MyTripDetail detail, String id, int sido_code) throws Exception {
-//		return tripMapper.putDetail(detail, id, sido_code);
-//	}
 	
 	@Override
 	public int putDetail(int detailNo, int sequence) throws Exception {
-		// TODO Auto-generated method stub
 		return tripMapper.putDetail(detailNo, sequence);
 	}
 

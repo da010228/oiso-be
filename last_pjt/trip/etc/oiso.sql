@@ -269,7 +269,7 @@ CREATE TABLE `comment_hotplace` (
 ) ENGINE=InnoDB;
 
 
--- 계획을 만들면 목록으로 저것들을 (아이디랑 , 시도 코드로?) 불러온다 여도 되긴 함
+
 CREATE TABLE IF NOT EXISTS `mytrip` (
   `mytripNo` int NOT NULL AUTO_INCREMENT,
   `id` VARCHAR(50) NOT NULL,
@@ -281,18 +281,26 @@ CREATE TABLE IF NOT EXISTS `mytrip` (
   PRIMARY KEY (`mytripNo`))
 ENGINE = InnoDB;
 
-insert into mytrip (id, sido_code, title, startPeriod, endPeriod)
-values("ssafy", 6, "나와줄래", 20230520, 20230526);
-
-
-drop table if exists mytrip_list;
--- 찜 미리 그냥 저장해두는 용도로 쓰고
 CREATE TABLE IF NOT EXISTS `mytrip_list` (
 `detailNo` int NOT NULL AUTO_INCREMENT,
 `contentId` int NOT NULL,
 `contentTypeId` int NOT NULL,
 `id` VARCHAR(50) NOT NULL,
 `sido_code` int NOT NULL,
-`day` varchar(3) DEFAULT 0,
+`sequence` int not null,
  PRIMARY KEY (`detailNo`)
 ) ENGINE=InnoDB;
+
+-- sequence를 위한 trigger 추가
+DELIMITER $$
+CREATE TRIGGER increase_sequence
+BEFORE INSERT ON mytrip_list
+FOR EACH ROW
+BEGIN
+    SET NEW.sequence = (
+        SELECT IFNULL(MAX(sequence), 0) + 1
+        FROM mytrip_list
+        WHERE id = NEW.id
+    );
+END $$
+DELIMITER ;

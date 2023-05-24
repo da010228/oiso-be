@@ -19,7 +19,5 @@ public interface TripMapper {
 	List<MyTripDetail> getMyTripDetailList(String id, int sido_code) throws Exception;
 	int postDetail(MyTripDetail detail) throws Exception;	
 	int delDetail(String id, int contentId) throws Exception;
-//	int putDetail(List<MyTripDetail> detail, String id, int sido_code) throws Exception;
-//	int putDetail(MyTripDetail detail, String id, int sido_code) throws Exception;
 	int putDetail(int detailNo, int sequence) throws Exception;
 }

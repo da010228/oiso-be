@@ -20,7 +20,6 @@
 		<result column="contentTypeId" property="contentTypeId"/>
 		<result column="id" property="id"/>
 		<result column="sido_code" property="sido_code"/>
-		<result column="day" property="day"/>
 		<result column="sequence" property="sequence"/>
 	</resultMap>
 	
@@ -46,10 +45,10 @@
 	
 	
 	<select id="getMyTripDetailList" resultMap="tripdetail">
-		SELECT detailNo, contentId, contentTypeId, sido_code, day, sequence
+		SELECT detailNo, contentId, contentTypeId, sido_code, sequence
 		FROM mytrip_list
 		WHERE sido_code = #{sido_code} AND id = #{id}
-		ORDER BY day, sequence
+		ORDER BY sequence
 	</select>
 	
 	<insert id="postDetail">
