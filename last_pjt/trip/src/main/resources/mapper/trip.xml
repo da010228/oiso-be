@@ -41,6 +41,15 @@
 		WHERE mytripNo = #{mytripNo}
 	</delete>
 	
+	<update id="putPlan">
+		UPDATE mytrip
+		SET
+		title = #{title},
+		startPeriod = #{startPeriod},
+		endPeriod = #{endPeriod}
+		WHERE mytripNo = #{mytripNo}
+	</update>
+	
 	
 	
 	

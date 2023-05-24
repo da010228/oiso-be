@@ -38,13 +38,22 @@ public class TripController {
 	public int postPlan(@RequestBody MyTrip plan) throws Exception {
 		return service.postPlan(plan);
 	}
+	
+	@PutMapping("/plan/{id}")
+	public int putPlan(@RequestBody MyTrip plan) throws Exception {
+		System.out.println(plan);
+		return service.putPlan(plan);
+	}
 
 	@DeleteMapping("/plan/{mytripNo}")
 	int delPlan(@PathVariable int mytripNo) throws Exception {
-		System.out.println(mytripNo);
 		int cnt = service.delPlan(mytripNo);
 		return cnt;
 	}
+	
+	
+	
+	
 
 	// 여행 상세 정보
 	@GetMapping("/{id}/{sido_code}")
@@ -68,7 +77,6 @@ public class TripController {
 	public int putDetail(/* @RequestBody List<MyTripDetail> MyTripDetail detail, */ 
 			@PathVariable int detailNo,
 			@PathVariable int sequence) throws Exception {
-		System.out.println(detailNo+" "+sequence);
 		return service.putDetail(detailNo, sequence);
 	}
 
