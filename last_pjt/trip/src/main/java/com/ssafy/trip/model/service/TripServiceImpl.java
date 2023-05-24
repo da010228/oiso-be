@@ -51,5 +51,10 @@ public class TripServiceImpl implements TripService {
 	public int putDetail(int detailNo, int sequence) throws Exception {
 		return tripMapper.putDetail(detailNo, sequence);
 	}
+	
+	@Override
+	public int getDetail(String id, int contentId) throws Exception {
+		return tripMapper.getDetail(id, contentId);
+	}
 
 }

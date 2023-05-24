@@ -287,26 +287,6 @@ CREATE TABLE IF NOT EXISTS `mytrip_list` (
 `contentTypeId` int NOT NULL,
 `id` VARCHAR(50) NOT NULL,
 `sido_code` int NOT NULL,
-`sequence` int not null,
+`sequence` int default 99,
  PRIMARY KEY (`detailNo`)
 ) ENGINE=InnoDB;
-
--- sequence를 위한 trigger 추가
-DELIMITER $$
-CREATE TRIGGER increase_sequence
-BEFORE INSERT ON mytrip_list
-FOR EACH ROW
-BEGIN
-    SET NEW.sequence = (
-        SELECT IFNULL(MAX(sequence), 0) + 1
-        FROM mytrip_list
-        WHERE id = NEW.id
-    );
-END $$
-DELIMITER ;
-
-select * from mytrip;
-		UPDATE mytrip
-		SET
-		title = "1234"
-		WHERE mytripNo = 2;
