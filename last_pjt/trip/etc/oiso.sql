@@ -276,8 +276,8 @@ CREATE TABLE IF NOT EXISTS `mytrip` (
   `sido_code` int NOT NULL,
   `title` VARCHAR(100) NOT NULL,
   `regTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `startPeriod` int NOT NULL,
-  `endPeriod` int NOT NULL,
+  `startPeriod` VARCHAR(15) NOT NULL,
+  `endPeriod` VARCHAR(15) NOT NULL,
   PRIMARY KEY (`mytripNo`))
 ENGINE = InnoDB;
 
@@ -304,3 +304,9 @@ BEGIN
     );
 END $$
 DELIMITER ;
+
+select * from mytrip;
+		UPDATE mytrip
+		SET
+		title = "1234"
+		WHERE mytripNo = 2;

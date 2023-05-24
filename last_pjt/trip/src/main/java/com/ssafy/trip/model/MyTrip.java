@@ -6,14 +6,14 @@ public class MyTrip {
 	private int sido_code;
 	private String title;
 	private String regTime;
-	private int startPeriod;
-	private int endPeriod;
+	private String startPeriod;
+	private String endPeriod;
 	
 	public MyTrip() {
 		super();
 	}
 
-	public MyTrip(String id, int sido_code, String title, int startPeriod, int endPeriod) {
+	public MyTrip(String id, int sido_code, String title, String startPeriod, String endPeriod) {
 		super();
 		this.id = id;
 		this.sido_code = sido_code;
@@ -22,7 +22,7 @@ public class MyTrip {
 		this.endPeriod = endPeriod;
 	}
 
-	public MyTrip(int mytripNo, String id, int sido_code, String title, String regTime, int startPeriod, int endPeriod) {
+	public MyTrip(int mytripNo, String id, int sido_code, String title, String regTime, String startPeriod, String endPeriod) {
 		super();
 		this.mytripNo = mytripNo;
 		this.id = id;
@@ -73,19 +73,19 @@ public class MyTrip {
 		this.regTime = regTime;
 	}
 
-	public int getStartPeriod() {
+	public String getStartPeriod() {
 		return startPeriod;
 	}
 
-	public void setStartPeriod(int startPeriod) {
+	public void setStartPeriod(String startPeriod) {
 		this.startPeriod = startPeriod;
 	}
 
-	public int getEndPeriod() {
+	public String getEndPeriod() {
 		return endPeriod;
 	}
 
-	public void setEndPeriod(int endPeriod) {
+	public void setEndPeriod(String endPeriod) {
 		this.endPeriod = endPeriod;
 	}
 
