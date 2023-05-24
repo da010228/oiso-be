@@ -78,4 +78,10 @@
 		WHERE detailNo = #{detailNo}
 	</update>
 	
+	<select id="getDetail" resultType="Integer">
+		SELECT count(*)
+		FROM mytrip_list
+		WHERE contentId = #{contentId} AND id = #{id}
+	</select>
+	
 </mapper>

@@ -76,9 +76,16 @@ public class TripController {
 	public int putDetail(/* @RequestBody List<MyTripDetail> MyTripDetail detail, */ 
 			@PathVariable int detailNo,
 			@PathVariable int sequence) throws Exception {
+		System.out.println(detailNo+" "+ sequence);
 		return service.putDetail(detailNo, sequence);
 	}
 
+	@GetMapping("/detail/{id}/{contentId}")
+	int getDetail(@PathVariable String id, @PathVariable int contentId) throws Exception {
+		int cnt = service.getDetail(id, contentId);
+		return cnt;
+	}
+	
 	@DeleteMapping("/{id}/{contentId}")
 	int delDetail(@PathVariable String id, @PathVariable int contentId) throws Exception {
 		int cnt = service.delDetail(id, contentId);
