@@ -224,8 +224,10 @@ CREATE TABLE IF NOT EXISTS `board_like_count` (
   `articleNo` int NOT NULL,
   PRIMARY KEY (`id`, `articleNo`),
   FOREIGN KEY (`id`) REFERENCES `user`(`id`),
-  FOREIGN KEY (`articleNo`) REFERENCES `board`(`articleNo`)
+  FOREIGN KEY (`articleNo`) REFERENCES `board`(`articleNo`) ON DELETE CASCADE
 ) ENGINE=InnoDB;
+
+
 
 DROP TABLE IF EXISTS `hotplace`;
 CREATE TABLE IF NOT EXISTS `hotplace` (
@@ -244,7 +246,7 @@ CREATE TABLE IF NOT EXISTS `hotplace_like_count` (
   `hotplaceNo` int NOT NULL,
   PRIMARY KEY (`id`, `hotplaceNo`),
   FOREIGN KEY (`id`) REFERENCES `user`(`id`),
-  FOREIGN KEY (`hotplaceNo`) REFERENCES `hotplace`(`hotplaceNo`)
+  FOREIGN KEY (`hotplaceNo`) REFERENCES `hotplace`(`hotplaceNo`) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 
@@ -265,7 +267,7 @@ CREATE TABLE IF NOT EXISTS `bulletin_like_count` (
   `bulletinNo` int NOT NULL,
   PRIMARY KEY (`id`, `bulletinNo`),
   FOREIGN KEY (`id`) REFERENCES `user`(`id`),
-  FOREIGN KEY (`bulletinNo`) REFERENCES `bulletin`(`bulletinNo`)
+  FOREIGN KEY (`bulletinNo`) REFERENCES `bulletin`(`bulletinNo`) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS `comment_board`;
