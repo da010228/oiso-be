@@ -12,7 +12,6 @@
 		<result column="content" property="content" />
 		<result column="regTime" property="regTime" />
 		<result column="viewCnt" property="viewCnt" />
-		<result column="likeCnt" property="likeCnt" />
 		<collection property="fileInfos" column="articleNo"
 			javaType="list" ofType="FileInfo" select="fileBoardList" />
 	</resultMap>
@@ -89,7 +88,6 @@
 		<result column="content" property="content" />
 		<result column="regTime" property="regTime" />
 		<result column="viewCnt" property="viewCnt" />
-		<result column="likeCnt" property="likeCnt" />
 		<collection property="fileInfos" column="hotplaceNo"
 			javaType="list" ofType="FileInfo" select="fileHotplaceList" />
 	</resultMap>
@@ -102,7 +100,7 @@
 
 	<select id="getHotplaceList" resultMap="hotplace">
 		SELECT hotplaceNo, title,
-		id, content, regTime, viewCnt, likeCnt
+		id, content, regTime, viewCnt,(SELECT COUNT(*) FROM hotplace_like_count WHERE hotplaceNo = hotplace.hotplaceNo) AS likeCnt
 		FROM hotplace
 		ORDER BY likeCnt DESC
 	</select>
@@ -117,7 +115,7 @@
 
 	<select id="getHotplace" resultMap="hotplace">
 		SELECT hotplaceNo, title, id,
-		content, regTime, viewCnt,  likeCnt
+		content, regTime, viewCnt,(SELECT COUNT(*) FROM hotplace_like_count WHERE hotplaceNo = hotplace.hotplaceNo) AS likeCnt
 		FROM hotplace
 		where hotplaceNo = #{articleNo}
 	</select>
@@ -128,8 +126,7 @@
 		title = #{title},
 		content =
 		#{content},
-		viewCnt = #{viewCnt},
-		likeCnt = #{likeCnt}
+		viewCnt = #{viewCnt}
 		WHERE hotplaceNo = #{articleNo}
 	</update>
 
@@ -140,9 +137,9 @@
 	</delete>
 
 	<insert id="postHotplace">
-		insert into hotplace (id, title, content, viewCnt, likeCnt)
+		insert into hotplace (id, title, content, viewCnt)
 		values (#{id}, #{title},
-		#{content}, 0, 0)
+		#{content}, 0)
 		<selectKey resultType="int" keyProperty="articleNo"
 			order="AFTER">
 			SELECT LAST_INSERT_ID()
@@ -168,19 +165,18 @@
 		<result column="content" property="content" />
 		<result column="regTime" property="regTime" />
 		<result column="viewCnt" property="viewCnt" />
-		<result column="likeCnt" property="likeCnt" />
 	</resultMap>
 
 	<select id="getBulletinList" resultMap="bulletin">
 		SELECT bulletinNo, title,
 		id,
-		content, regTime, viewCnt, likeCnt
+		content, regTime, viewCnt, (SELECT COUNT(*) FROM bulletin_like_count WHERE bulletinNo = bulletin.bulletinNo) AS likeCnt
 		FROM bulletin
 	</select>
 
 	<select id="getBulletin" resultMap="bulletin">
 		SELECT bulletinNo, title, id,
-		content, regTime, viewCnt, likeCnt
+		content, regTime, viewCnt, (SELECT COUNT(*) FROM bulletin_like_count WHERE bulletinNo = bulletin.bulletinNo) AS likeCnt
 		FROM bulletin
 		WHERE bulletinNo = #{articleNo}
 	</select>
@@ -191,8 +187,7 @@
 		title = #{title},
 		content =
 		#{content},
-		viewCnt = #{viewCnt},
-		likeCnt = #{likeCnt}
+		viewCnt = #{viewCnt}
 		WHERE bulletinNo = #{articleNo}
 	</update>
 
@@ -203,9 +198,9 @@
 	</delete>
 
 	<insert id="postBulletin">
-		INSERT INTO bulletin (id, title, content, viewCnt, likeCnt)
+		INSERT INTO bulletin (id, title, content, viewCnt)
 		VALUES (#{id}, #{title},
-		#{content}, 0, 0)
+		#{content}, 0)
 	</insert>
 
 
