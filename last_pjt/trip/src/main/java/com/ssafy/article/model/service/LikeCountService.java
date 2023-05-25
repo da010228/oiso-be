@@ -2,9 +2,9 @@ package com.ssafy.article.model.service;
 
 public interface LikeCountService {
 
-	public boolean checkArticle(String id, int articleNo) throws Exception;
+	public boolean checkBoard(String id, int articleNo) throws Exception;
 
-	public boolean likeArticle(String id, int articleNo) throws Exception;
+	public boolean likeBoard(String id, int articleNo) throws Exception;
 
 	public boolean checkHotplace(String id, int articleNo) throws Exception;
 
