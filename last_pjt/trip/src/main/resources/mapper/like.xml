@@ -3,23 +3,67 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper
 	namespace="com.ssafy.article.model.mapper.LikeCountMapper">
+	
+	<!-- 게시판 -->
 
-	<select id="checkIfLiked" resultType="int">
+	<select id="checkIfLikedBoard" resultType="int">
 		SELECT COUNT(*)
 		FROM
 		board_like_count
 		WHERE id = #{id} AND articleNo = #{articleNo}
 	</select>
 
-	<insert id="addLike" parameterType="LikeRequest">
+	<insert id="addLikeBoard" parameterType="LikeRequest">
 		INSERT INTO board_like_count
 		(id, articleNo) VALUES (#{id},
 		#{articleNo})
 	</insert>
 
-	<delete id="removeLike" parameterType="LikeRequest">
+	<delete id="removeLikeBoard" parameterType="LikeRequest">
 		DELETE FROM
 		board_like_count WHERE id = #{id} AND articleNo =
+		#{articleNo}
+	</delete>
+	
+	<!-- 핫플레이스 -->
+	
+	<select id="checkIfLikedHotplace" resultType="int">
+		SELECT COUNT(*)
+		FROM
+		hotplace_like_count
+		WHERE id = #{id} AND hotplaceNo = #{articleNo}
+	</select>
+
+	<insert id="addLikeHotplace" parameterType="LikeRequest">
+		INSERT INTO hotplace_like_count
+		(id, hotplaceNo) VALUES (#{id},
+		#{articleNo})
+	</insert>
+
+	<delete id="removeLikeHotplace" parameterType="LikeRequest">
+		DELETE FROM
+		hotplace_like_count WHERE id = #{id} AND hotplaceNo =
+		#{articleNo}
+	</delete>
+	
+	<!-- 공지사항 -->
+	
+	<select id="checkIfLikedBulletin" resultType="int">
+		SELECT COUNT(*)
+		FROM
+		bulletin_like_count
+		WHERE id = #{id} AND bulletinNo = #{articleNo}
+	</select>
+
+	<insert id="addLikeBulletin" parameterType="LikeRequest">
+		INSERT INTO bulletin_like_count
+		(id, bulletinNo) VALUES (#{id},
+		#{articleNo})
+	</insert>
+
+	<delete id="removeLikeBulletin" parameterType="LikeRequest">
+		DELETE FROM
+		bulletin_like_count WHERE id = #{id} AND bulletinNo =
 		#{articleNo}
 	</delete>
 
