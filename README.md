@@ -58,77 +58,6 @@
 
 <br>
 
-# 프로젝트 구성
-
-## 템플릿 구성도 ( Figma )
-
-> https://www.figma.com/file/JjtNWTaMerWoLtUOchbd3s/OISO?type=design&node-id=0-1&t=L2JQESTuvP96NJwv-0
-
-![](https://velog.velcdn.com/images/hvvany/post/742662fa-6094-4b21-a392-f4eb7cdcf645/image.png)
-![](https://velog.velcdn.com/images/hvvany/post/aedb812e-02ed-4855-816b-c339fb7146cf/image.png)
-
----
-
-## Use Case Diagram
-
-![](https://velog.velcdn.com/images/hvvany/post/8967ef71-7172-4979-8af4-81c3f5d665a1/image.png)
-
----
-
-## 모델 구성도 ( mySQL Workbench )
-
-![](https://velog.velcdn.com/images/hvvany/post/67606a41-1c26-4c36-832f-4d3cbfa2675c/image.png)
-
-## Class Diagram
-
-![](https://velog.velcdn.com/images/hvvany/post/6195a893-83a6-48f9-88f5-a858e943c793/image.png)
-
-![](https://velog.velcdn.com/images/hvvany/post/86d20e94-c9cf-415a-8337-0e4ae9a98553/image.png)
-
-![](https://velog.velcdn.com/images/hvvany/post/0822c466-a3e5-4f8b-98da-32b7aa4f3128/image.png)
-
-![](https://velog.velcdn.com/images/hvvany/post/0334f959-3c25-4b25-b3b9-bbd3f4c1b2ee/image.png)
-
-## API 명세서
-
-| 우선 순위 |   앱    |               이름               |     메소드     |              요청 URL               |              상세 내용               |                                                                         참고사항                                                                          |
-| :-------: | :-----: | :------------------------------: | :------------: | :---------------------------------: | :----------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|     1     |  user   |          로그인 페이지           |      GET       |                  /                  |          로그인 페이지 이동          |                                                                                                                                                           |
-|     1     |  user   |              로그인              |      POST      |             /user/login             |             로그인 요청              |                                                                                                                                                           |
-|     1     |  user   |         회원가입 페이지          |      GET       |            /user/signup             |         회원가입 페이지 이동         |                                                                                                                                                           |
-|     1     |  user   |             회원가입             |      POST      |            /user/signup             |          회원가입 정보 전송          |                                                                                                                                                           |
-|     1     |  user   |            마이페이지            | GET,PUT,DELETE |           /user/{user_id}           |        내 정보 수정 삭제 조회        |                                                                                                                                                           |
-|     1     |  user   |         멤버 관리페이지          |      GET       |            /user/member             |     멤버정보 조회\_관리자만 가능     |                                                                           admin                                                                           |
-|     1     |  user   |          멤버 정보 수정          |   PUT,DELETE   |       /user/member/{user_id}        | 멤버 정보 수정 삭제 \_ 관리자만 가능 |                                                                           admin                                                                           |
-|     1     |  trip   |          전체 메인 화면          |      GET       |                /trip                |            여행 메인 화면            |                                                           지역 및 필터 선택 가능한 조회 페이지                                                            |
-|     1     |  trip   |       지역별 관광정보 화면       |      GET       |             /trip/info              |      지역별 관광정보 검색 화면       |                                                    관광지, 숙박, 음식, 문화시설, 공연, 쇼핑, 여행코스                                                     |
-|     1     |  trip   |         지역별 관광정보          |      POST      |             /trip/info              |      지역별 관광정보 검색 조회       |                                                    관광지, 숙박, 음식, 문화시설, 공연, 쇼핑, 여행코스                                                     |
-|     1     | article |   핫플레이스 공유 게시판 목록    |      GET       |          /article/hotplace          |          핫플 게시글 리스트          |                                                                                                                                                           |
-|     1     | article |  핫플레이스 공유 게시판 글작성   |    GET,POST    |        /article/hotplace/new        |       핫플 게시글 작성 페이지        |                                                                                                                                                           |
-|     1     | article |  핫플레이스 디테일, 수정, 삭제   | GET,PUT,DELETE |   /article/hotplace/{article_id}    |    핫플 게시글 디테일, 수정, 삭제    |                                                                                                                                                           |
-|     1     | article |        핫플레이스 좋아요         |      POST      | /article/hotplace/{article_id}/like |          핫플 게시글 좋아요          |                                                                                                                                                           |
-|  \*\*\*   | \*\*\*  |              \*\*\*              |     \*\*\*     |               \*\*\*                |                \*\*\*                |                                                                          \*\*\*                                                                           |
-|     2     | article |        공유게시판 페이지         |      GET       |           /article/board            |       전체 게시글 보는 페이지        |                                                                                                                                                           |
-|     2     | article |        공유게시판 글작성         |    GET,POST    |         /article/board/new          |          게시글 작성 페이지          |                                                                                                                                                           |
-|     2     | article | 공유게시판 글 디테일, 수정, 삭제 | GET,PUT,DELETE |     /article/board/{article_id}     |       게시글 디테일, 수정 삭제       |                                                                                                                                                           |
-|     2     | article |       공유게시판 글 좋아요       |      POST      |  /article/board/{article_id}/like   |            게시글 좋아요             |                                                                                                                                                           |
-|     2     | article |          공지사항 조회           |      GET       |          /article/bulletin          |          전체 공지사항 보기          |                                                                                                                                                           |
-|     2     | article |          공지사항 작성           |    GET,POST    |        /article/bulletin/new        |            공지사항 작성             |                                                                           admin                                                                           |
-|     2     | article |   공지사항 디테일, 수정, 삭제    | GET,PUT,DELETE |   /article/bulletin/{article_id}    |     공지사항 디테일, 수정, 삭제      |                                                                           admin                                                                           |
-|     2     | article |         공지사항 좋아요          |      POST      | /article/bulletin/{article_id}/like |           공지사항 좋아요            |                                                                                                                                                           |
-|  \*\*\*   | \*\*\*  |              \*\*\*              |     \*\*\*     |               \*\*\*                |                \*\*\*                |                                                                          \*\*\*                                                                           |
-|     3     | mytrip  |      나의 여행 계획 페이지       |      GET       |            /mytrip/{id}             |         나의 여행계획 페이지         | 처음에 계획 가져오면서 지역 정보 활용하여 날씨 뉴스 정보 첫 번째 지역 기준. 도시 선택 시 아래의 날씨, 뉴스 get 요청을 통해 지역에 맞는 정보 가져오기 요청 |
-|     3     | mytrip  |       나의 여행 계획 추가        |      POST      |          /mytrip/plan/{id}          |        나의 여행계획 추가하기        |                                                                                                                                                           |
-|     3     | mytrip  |       나의 여행 계획 수정        |      PUT       |          /mytrip/plan/{id}          |        나의 여행계획 수정하기        |                                                                                                                                                           |
-|     3     | mytrip  |       나의 여행 계획 삭제        |     DELETE     |          /mytrip/plan/{id}          |        나의 여행계획 삭제하기        |                                                                                                                                                           |
-|     3     | mytrip  |    나의 여행 상세 계획 페이지    |      GET       |          /{id}/{sido_code}          |     나의 여행계획 디테일 페이지      |                                                                                                                                                           |
-|     3     | mytrip  |  나의 여행 상세 계획 추가 여부   |      GET       |      /detail/{id}/{contentId}       |         나의 계획 추가 여부          |                                                                                                                                                           |
-|     3     | mytrip  |     나의 여행 상세 계획 추가     |      POST      |                /{id}                |      나의 여행 계획에 추가하기       |                                                                                                                                                           |
-|     3     | mytrip  |     나의 여행 상세 계획 삭제     |     DELETE     |          /{id}/{contentId}          |     나의 여행 계획에서 삭제하기      |                                                                                                                                                           |
-|     3     | mytrip  |  나의 여행 상세 계획 순서 변경   |      PUT       |       /{detatilNo}/{sequence}       |     나의 여행계획 순서 변경하기      |                                                                                                                                                           |
-|  \*\*\*   | \*\*\*  |              \*\*\*              |     \*\*\*     |               \*\*\*                |                \*\*\*                |                                                                          \*\*\*                                                                           |
-|     4     | mytrip  |    관광지 날씨 정보 가져오기     |      GET       |     /mytrip/weather/{sido_code}     |     관심 지역 날씨 정보 가져오기     |                                                                                                                                                           |
-
 <br>
 
 # 서비스 소개
@@ -205,11 +134,97 @@
 > 한국관광공사의 API를 활용하여 지역별 관광지, 문화시설, 숙소 등의 다양한 정보를 제공한다.
 
 <br>
+
+
+## 프로젝트 후기
+
+- **김준환** : 1학기 과정을 통해 배운 내용을 직접 서비스를 구현하며 부딪힐 수 있는 좋은 경험이었습니다.
+  자바를 처음 배우며 힘든 점도 많았지만 이제 spring boot로 백엔드 서버를 구축하고 vue로 SPA를 제작하는 수준까지 성장할 수 있었습니다. 좋은 교수님과 동기들 덕분에 큰 성장을 이루었습니다. 감사합니다 :)
+
+- **강다은** : 실습을 통해서 배운 내용을 바로 적용하며 웹 개발에 대한 이해도를 높일 수 있었습니다.
+  프론트엔드와 백엔드 전부 내 손을 거쳤다는 생각에 자신감을 끌어 올려 줬습니다.
+  마지막으로 갈수록 잘 만들고 싶다는 생각이 강해져서 점점 의욕이 생겼는데 끝까지 노력해준 페어님께 감사의 인사를… (꾸벅)
+
+
+# 프로젝트 구성
+
+## 템플릿 구성도 ( Figma )
+
+> https://www.figma.com/file/JjtNWTaMerWoLtUOchbd3s/OISO?type=design&node-id=0-1&t=L2JQESTuvP96NJwv-0
+
+![](https://velog.velcdn.com/images/hvvany/post/742662fa-6094-4b21-a392-f4eb7cdcf645/image.png)
+![](https://velog.velcdn.com/images/hvvany/post/aedb812e-02ed-4855-816b-c339fb7146cf/image.png)
+
+---
+
+## Use Case Diagram
+
+![](https://velog.velcdn.com/images/hvvany/post/8967ef71-7172-4979-8af4-81c3f5d665a1/image.png)
+
+---
+
+## 모델 구성도 ( mySQL Workbench )
+
+![](https://velog.velcdn.com/images/hvvany/post/67606a41-1c26-4c36-832f-4d3cbfa2675c/image.png)
+
+## Class Diagram
+
+![](https://velog.velcdn.com/images/hvvany/post/6195a893-83a6-48f9-88f5-a858e943c793/image.png)
+
+![](https://velog.velcdn.com/images/hvvany/post/86d20e94-c9cf-415a-8337-0e4ae9a98553/image.png)
+
+![](https://velog.velcdn.com/images/hvvany/post/0822c466-a3e5-4f8b-98da-32b7aa4f3128/image.png)
+
+![](https://velog.velcdn.com/images/hvvany/post/0334f959-3c25-4b25-b3b9-bbd3f4c1b2ee/image.png)
+
+                                                                                                                   
+<br>
+
+## API 명세서
+
+| 우선 순위 |   앱    |               이름               |     메소드     |              요청 URL               |              상세 내용               |                                                                         참고사항                                                                          |
+| :-------: | :-----: | :------------------------------: | :------------: | :---------------------------------: | :----------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|     1     |  user   |          로그인 페이지           |      GET       |                  /                  |          로그인 페이지 이동          |                                                                                                                                                           |
+|     1     |  user   |              로그인              |      POST      |             /user/login             |             로그인 요청              |                                                                                                                                                           |
+|     1     |  user   |         회원가입 페이지          |      GET       |            /user/signup             |         회원가입 페이지 이동         |                                                                                                                                                           |
+|     1     |  user   |             회원가입             |      POST      |            /user/signup             |          회원가입 정보 전송          |                                                                                                                                                           |
+|     1     |  user   |            마이페이지            | GET,PUT,DELETE |           /user/{user_id}           |        내 정보 수정 삭제 조회        |                                                                                                                                                           |
+|     1     |  user   |         멤버 관리페이지          |      GET       |            /user/member             |     멤버정보 조회\_관리자만 가능     |                                                                           admin                                                                           |
+|     1     |  user   |          멤버 정보 수정          |   PUT,DELETE   |       /user/member/{user_id}        | 멤버 정보 수정 삭제 \_ 관리자만 가능 |                                                                           admin                                                                           |
+|     1     |  trip   |          전체 메인 화면          |      GET       |                /trip                |            여행 메인 화면            |                                                           지역 및 필터 선택 가능한 조회 페이지                                                            |
+|     1     |  trip   |       지역별 관광정보 화면       |      GET       |             /trip/info              |      지역별 관광정보 검색 화면       |                                                    관광지, 숙박, 음식, 문화시설, 공연, 쇼핑, 여행코스                                                     |
+|     1     |  trip   |         지역별 관광정보          |      POST      |             /trip/info              |      지역별 관광정보 검색 조회       |                                                    관광지, 숙박, 음식, 문화시설, 공연, 쇼핑, 여행코스                                                     |
+|     1     | article |   핫플레이스 공유 게시판 목록    |      GET       |          /article/hotplace          |          핫플 게시글 리스트          |                                                                                                                                                           |
+|     1     | article |  핫플레이스 공유 게시판 글작성   |    GET,POST    |        /article/hotplace/new        |       핫플 게시글 작성 페이지        |                                                                                                                                                           |
+|     1     | article |  핫플레이스 디테일, 수정, 삭제   | GET,PUT,DELETE |   /article/hotplace/{article_id}    |    핫플 게시글 디테일, 수정, 삭제    |                                                                                                                                                           |
+|     1     | article |        핫플레이스 좋아요         |      POST      | /article/hotplace/{article_id}/like |          핫플 게시글 좋아요          |                                                                                                                                                           |
+|  \*\*\*   | \*\*\*  |              \*\*\*              |     \*\*\*     |               \*\*\*                |                \*\*\*                |                                                                          \*\*\*                                                                           |
+|     2     | article |        공유게시판 페이지         |      GET       |           /article/board            |       전체 게시글 보는 페이지        |                                                                                                                                                           |
+|     2     | article |        공유게시판 글작성         |    GET,POST    |         /article/board/new          |          게시글 작성 페이지          |                                                                                                                                                           |
+|     2     | article | 공유게시판 글 디테일, 수정, 삭제 | GET,PUT,DELETE |     /article/board/{article_id}     |       게시글 디테일, 수정 삭제       |                                                                                                                                                           |
+|     2     | article |       공유게시판 글 좋아요       |      POST      |  /article/board/{article_id}/like   |            게시글 좋아요             |                                                                                                                                                           |
+|     2     | article |          공지사항 조회           |      GET       |          /article/bulletin          |          전체 공지사항 보기          |                                                                                                                                                           |
+|     2     | article |          공지사항 작성           |    GET,POST    |        /article/bulletin/new        |            공지사항 작성             |                                                                           admin                                                                           |
+|     2     | article |   공지사항 디테일, 수정, 삭제    | GET,PUT,DELETE |   /article/bulletin/{article_id}    |     공지사항 디테일, 수정, 삭제      |                                                                           admin                                                                           |
+|     2     | article |         공지사항 좋아요          |      POST      | /article/bulletin/{article_id}/like |           공지사항 좋아요            |                                                                                                                                                           |
+|  \*\*\*   | \*\*\*  |              \*\*\*              |     \*\*\*     |               \*\*\*                |                \*\*\*                |                                                                          \*\*\*                                                                           |
+|     3     | mytrip  |      나의 여행 계획 페이지       |      GET       |            /mytrip/{id}             |         나의 여행계획 페이지         | 처음에 계획 가져오면서 지역 정보 활용하여 날씨 뉴스 정보 첫 번째 지역 기준. 도시 선택 시 아래의 날씨, 뉴스 get 요청을 통해 지역에 맞는 정보 가져오기 요청 |
+|     3     | mytrip  |       나의 여행 계획 추가        |      POST      |          /mytrip/plan/{id}          |        나의 여행계획 추가하기        |                                                                                                                                                           |
+|     3     | mytrip  |       나의 여행 계획 수정        |      PUT       |          /mytrip/plan/{id}          |        나의 여행계획 수정하기        |                                                                                                                                                           |
+|     3     | mytrip  |       나의 여행 계획 삭제        |     DELETE     |          /mytrip/plan/{id}          |        나의 여행계획 삭제하기        |                                                                                                                                                           |
+|     3     | mytrip  |    나의 여행 상세 계획 페이지    |      GET       |          /{id}/{sido_code}          |     나의 여행계획 디테일 페이지      |                                                                                                                                                           |
+|     3     | mytrip  |  나의 여행 상세 계획 추가 여부   |      GET       |      /detail/{id}/{contentId}       |         나의 계획 추가 여부          |                                                                                                                                                           |
+|     3     | mytrip  |     나의 여행 상세 계획 추가     |      POST      |                /{id}                |      나의 여행 계획에 추가하기       |                                                                                                                                                           |
+|     3     | mytrip  |     나의 여행 상세 계획 삭제     |     DELETE     |          /{id}/{contentId}          |     나의 여행 계획에서 삭제하기      |                                                                                                                                                           |
+|     3     | mytrip  |  나의 여행 상세 계획 순서 변경   |      PUT       |       /{detatilNo}/{sequence}       |     나의 여행계획 순서 변경하기      |                                                                                                                                                           |
+|  \*\*\*   | \*\*\*  |              \*\*\*              |     \*\*\*     |               \*\*\*                |                \*\*\*                |                                                                          \*\*\*                                                                           |
+|     4     | mytrip  |    관광지 날씨 정보 가져오기     |      GET       |     /mytrip/weather/{sido_code}     |     관심 지역 날씨 정보 가져오기     |                                        
+
 <br>
 
 ## 개발 이슈
 
-### 1. router는 엥간하면 name 쓰자
+### 1. router는 웬만하면 name 쓰자
 
 router를 사용할 때 name으로 사용하면 충돌 위험이 낮아진다.
 경로를 직접 입력할 경우 의도하지 않게 get요청이 보내지는 현상이 일어났다.
@@ -340,7 +355,7 @@ ArticleController의 boardnew post 부분
 	}
 ```
 
-이슈 정리
+#### 이슈 정리
 
 1. ‘files’를 찾지 못한다
 
@@ -482,13 +497,3 @@ vue의 `양방향 바인딩`을 이용하여 swiper-slide로 사용하는 weathe
 `:key="weather.length”`
 
 length가 증가할 때마다 swiper가 다시 구성요소를 렌더링하고 새 인스턴스를 생성하며 swiper를 다시 로드한다.
-
-## 프로젝트 후기
-
-- **김준환** : 1학기 과정을 통해 배운 내용을 직접 서비스를 구현하며 부딪힐 수 있는 좋은 경험이었습니다.
-  자바를 처음 배우며 힘든 점도 많았지만 이제 spring boot로 백엔드 서버를 구축하고 vue로 SPA를 제작하는 수준까지 성장할 수 있었습니다. 좋은 교수님과 동기들 덕분에 큰 성장을 이루었습니다. 감사합니다 :)
-
-- **강다은** : 실습을 통해서 배운 내용을 바로 적용하며 웹 개발에 대한 이해도를 높일 수 있었습니다.
-  프론트엔드와 백엔드 전부 내 손을 거쳤다는 생각에 자신감을 끌어 올려 줬습니다.
-  마지막으로 갈수록 잘 만들고 싶다는
-  생각이 강해져서 점점 의욕이 생겼는데 끝까지 노력해준 페어님께 감사의 인사를… (꾸벅)
