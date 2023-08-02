@@ -321,8 +321,6 @@ ArticleController의 boardnew post 부분
 // formData는 RequestPart 어노테이션을 통해 MultipartFile 클래스로 데이터를 받는다. 여기서 required = false 를 안해주니 에러가 발생하였다.
 
 		System.out.println("article : " + article + ", files : " + files);
-// 프린트 : article : Article [articleNo=0, title=asdf, id=ssafy, content=asdf, regTime=null], files : [Lorg.springframework.web.multipart.MultipartFile;@4049d099
-
 		String realPath = "/Users/hvvany/Desktop/OISO_BE/last_pjt/trip/src/main/resources/static/imgs";  // 스프링 부트에서 파일 저장 시 상대경로로 하면 경로 못찾음
 		String today = new SimpleDateFormat("yyMMdd").format(new Date());
 		File folder = new File(realPath);
