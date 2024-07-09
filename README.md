@@ -1,6 +1,5 @@
 # Our time is On
 
-서비스 주소: https://hvvany.github.io/oiso/ <br>
 깃허브 프론트엔드: https://github.com/hvvany/OISO_FE <br>
 깃허브 백엔드 : https://github.com/da010228/OISO_BE
 
